@@ -7,7 +7,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
-    updateProfile,
+    updateProfile
 } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 
@@ -67,7 +67,6 @@ const UserContext = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     };
 
-    // const value = useMemo(() => ({ authInfo }), []) as UserValue;
     return (
         <AuthContext.Provider
             value={{

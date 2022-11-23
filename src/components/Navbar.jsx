@@ -12,13 +12,19 @@ const Navbar = () => {
     const navigate = useNavigate();
     const { logOut, user, setUser, setLoading } = useContext(AuthContext);
     const [theme, setTheme] = useState(null);
-    const pages = [{ pageName: 'Home', link: '/', id: 1 }];
+    const pages = [
+        { pageName: 'Home', link: '/', id: 1 },
+        { pageName: 'Blogs', link: '/blogs', id: 2 },
+        { pageName: 'Dashboard', link: '/dashboard', id: 3 },
+
+];
 
     const handleClick = () => {
         logOut()
             .then(() => {
                 toast.success('Sign-out successful.');
                 setLoading(false);
+                localStorage.removeItem('token');
                 setUser(null);
                 navigate('/');
             })
