@@ -1,5 +1,15 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-export default function Root() {
-    return <div>Root</div>;
-}
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+
+const Root = () => (
+    <div>
+        <Navbar />
+        <Outlet />
+        <Footer />
+    </div>
+);
+
+export default Root;
