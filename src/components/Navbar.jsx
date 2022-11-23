@@ -1,13 +1,31 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import Avatar from '../assets/images/avatar.png';
 import Logo from '../assets/images/logo.png';
+import AuthContext from '../Contexts/AuthContext';
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const { logOut, user, setUser, setLoading } = useContext(AuthContext);
     const [theme, setTheme] = useState(null);
     const pages = [{ pageName: 'Home', link: '/', id: 1 }];
+
+    const handleClick = () => {
+        logOut()
+            .then(() => {
+                toast.success('Sign-out successful.');
+                setLoading(false);
+                setUser(null);
+                navigate('/');
+            })
+            .catch((er) => {
+                console.error(er);
+            });
+    };
 
     // handling dark mode light mode
     useEffect(() => {
@@ -59,11 +77,43 @@ const Navbar = () => {
                                     <NavLink to={page.link}>{page.pageName}</NavLink>
                                 </li>
                             ))}
+                            <div className="md:hidden dark:text-white">
+                                {user?.uid ? (
+                                    <li>
+                                        <button
+                                            onClick={handleClick}
+                                            type="button"
+                                            className="button text-black"
+                                        >
+                                            logout
+                                        </button>
+                                    </li>
+                                ) : (
+                                    <div className="mx-5">
+                                        <li>
+                                            <Link
+                                                to="/login"
+                                                className="mr-2 text-black dark:text-white "
+                                            >
+                                                Login
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to="/signup"
+                                                className="text-black dark:text-white"
+                                            >
+                                                SignUp
+                                            </Link>
+                                        </li>
+                                    </div>
+                                )}
+                            </div>
                         </ul>
                     </div>
                     <NavLink to="/" className="btn btn-ghost normal-case hidden md:flex text-xl">
                         <img className="w-8 mr-2" src={Logo} alt="logo" />
-                        <span className="text-teal-600 dark:text-teal-300">Second-Buy-Books</span>
+                        <span className="text-teal-600 dark:text-teal-300">Comix</span>
                     </NavLink>
                 </div>
                 <div className="navbar-center lg:flex text-sm">
@@ -89,10 +139,49 @@ const Navbar = () => {
                     {/* Logo middle */}
                     <Link to="/home" className="btn btn-ghost normal-case text-xl md:hidden">
                         <img className="w-8 mr-2" src={Logo} alt="logo" />
-                        <span className="text-teal-600 dark:text-teal-300">Second-Buy-Books</span>
+                        <span className="text-teal-600 dark:text-teal-300">Comix</span>
                     </Link>
                 </div>
                 <div className="navbar-end text-sm ">
+                    <div className="hidden md:flex ">
+                        {user?.uid ? (
+                            <button
+                                onClick={handleClick}
+                                type="button"
+                                className=" text-black dark:text-white hover:underline"
+                            >
+                                logout
+                            </button>
+                        ) : (
+                            <div className="mx-5">
+                                <Link
+                                    to="/login"
+                                    className="mr-2 text-black dark:text-white hover:underline "
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    to="/signup"
+                                    className="text-black dark:text-white hover:underline"
+                                >
+                                    SignUp
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+                    <div
+                        className="tooltip hover:tooltip-open tooltip-bottom tooltip-success"
+                        data-tip={user?.displayName || 'Please Login'}
+                    >
+                        <Link to="/profile">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-8 rounded-full">
+                                    <img src={user?.photoURL || Avatar} alt="img" />
+                                </div>
+                            </label>
+                        </Link>
+                    </div>
+
                     {/* ----------------------------- */}
 
                     {/* dark mood toggler */}
