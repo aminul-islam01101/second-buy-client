@@ -27,15 +27,21 @@ const DashboardRoot = () => {
                 <div className="drawer-side  ">
                     <label htmlFor="dashboardOpener" className="drawer-overlay" />
                     <ul className="menu p-4 w-56 bg-base-100 text-base-content">
+                        <li>
+                            {isAdmin && <Link to="/dashboard">Admin Dashboard</Link>}
+                            {isSeller && <Link to="/dashboard">Seller Dashboard</Link>}
+                            {isBuyer && <Link to="/dashboard">Buyer Dashboard</Link>}
+                        </li>
+
                         {isBuyer && (
                             <li>
-                                <Link to="/dashboard">My Orders</Link>
+                                <Link to="/dashboard/myorders">My Orders</Link>
                             </li>
                         )}
                         {isAdmin && (
                             <>
                                 <li>
-                                    <Link to="/dashboard">All Users</Link>
+                                    <Link to="/dashboard/users">All Users</Link>
                                 </li>
                                 <li>
                                     <Link to="/dashboard/reported">Reported</Link>
@@ -45,7 +51,7 @@ const DashboardRoot = () => {
                         {isSeller && (
                             <>
                                 <li>
-                                    <Link to="/dashboard">My Products</Link>
+                                    <Link to="/dashboard/myproducts">My Products</Link>
                                 </li>
                                 <li>
                                     <Link to="/dashboard/addproducts">Add Products</Link>

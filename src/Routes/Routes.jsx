@@ -16,6 +16,8 @@ import CategoryDetails from '../pages/Home/category/CategoryDetails';
 import AdminRoute from './AdminRoute';
 import BuyerRoute from './BuyerRoute';
 import DashboardRoot from './DashboardRoot';
+
+import MyDashboard from '../pages/dashboard/MyDashboard';
 import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
 import SellerRoute from './SellerRoute';
@@ -46,9 +48,11 @@ const router = createBrowserRouter(
                         <DashboardRoot />
                     </ProtectedRoute>
                 }
+                errorElement={<Error />}
             >
+                <Route path="/dashboard" element={<MyDashboard />} />
                 <Route
-                    path="/dashboard"
+                    path="/dashboard/myorders"
                     element={
                         <BuyerRoute>
                             <MyOrders />
@@ -56,7 +60,7 @@ const router = createBrowserRouter(
                     }
                 />
                 <Route
-                    path="/dashboard"
+                    path="/dashboard/users"
                     element={
                         <AdminRoute>
                             <AllUser />
@@ -73,7 +77,7 @@ const router = createBrowserRouter(
                     }
                 />
                 <Route
-                    path="/dashboard"
+                    path="/dashboard/myproducts"
                     element={
                         <SellerRoute>
                             <MyProducts />
