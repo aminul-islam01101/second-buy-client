@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CategoryCard = ({ _id }) => (
+const CategoryCard = ({ product }) => (
     <div>
         <div className="w-full h-full rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
             <img
@@ -14,7 +14,7 @@ const CategoryCard = ({ _id }) => (
                     <h2 className="text-3xl font-semibold tracking-wide">card</h2>
                     <p className="dark:text-gray-100">category name</p>
                 </div>
-                <Link to={`/category/${_id}`}>
+                <Link to={`/category/${product.id}`}>
                     <button type="button" className="button w-full">
                         Details
                     </button>

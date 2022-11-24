@@ -3,10 +3,16 @@ import CategoryCard from './CategoryCard';
 
 const Categories = () => {
     console.log('categories');
+    const product = {
+        id: 1,
+        seller: 'mujtoba',
+        sellerEmail: 'livin61542@probdd.com',
+        bookName: 'rohosser sondhan',
+    };
 
     return (
         <div>
-            <CategoryCard _id={1} />
+            <CategoryCard product={product} />
         </div>
     );
 };

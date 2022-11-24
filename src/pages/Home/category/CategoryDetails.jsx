@@ -1,11 +1,15 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import AuthContext from '../../../Contexts/AuthContext';
 
 import BookingModal from './BookingModal';
 import BooksCard from './BooksCard';
 
 const CategoryDetails = () => {
+    const { id } = useParams();
+    console.log(id);
+
     const { user } = useContext(AuthContext);
     const [role, setRole] = useState('');
     const handleClick = () => {
@@ -20,13 +24,12 @@ const CategoryDetails = () => {
         });
     };
     console.log(role);
-    
 
     return (
         <div>
             <BooksCard handleClick={handleClick} />
 
-            <BookingModal role={role} />
+            <BookingModal id={id} role={role} />
         </div>
     );
 };
