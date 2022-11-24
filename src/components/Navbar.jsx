@@ -15,9 +15,7 @@ const Navbar = () => {
     const pages = [
         { pageName: 'Home', link: '/', id: 1 },
         { pageName: 'Blogs', link: '/blogs', id: 2 },
-        { pageName: 'Dashboard', link: '/dashboard', id: 3 },
-
-];
+    ];
 
     const handleClick = () => {
         logOut()
@@ -78,11 +76,20 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 dark:bg-gray-600  rounded-box w-52"
                         >
-                            {pages.map((page) => (
-                                <li key={page.id}>
-                                    <NavLink to={page.link}>{page.pageName}</NavLink>
-                                </li>
-                            ))}
+                            <div>
+                                <div>
+                                    {pages.map((page) => (
+                                        <li key={page.id}>
+                                            <NavLink to={page.link}>{page.pageName}</NavLink>
+                                        </li>
+                                    ))}
+                                </div>
+                                {user?.uid && (
+                                    <li>
+                                        <NavLink to="/dashboard">Dashboard</NavLink>
+                                    </li>
+                                )}
+                            </div>
                             <div className="md:hidden dark:text-white">
                                 {user?.uid ? (
                                     <li>
@@ -123,7 +130,7 @@ const Navbar = () => {
                     </NavLink>
                 </div>
                 <div className="navbar-center lg:flex text-sm">
-                    <ul className=" md:flex md:flex-row p-0 hidden  gap-1 ">
+                    <ul className=" md:flex md:flex-row items-center p-0 hidden  gap-1 ">
                         {pages.map((page) => (
                             <li
                                 className=" rounded px-1 py-2 hover:dark:text-black hover:bg-[#d3ecf3] transition ease-in-out delay-150 hover:shadow-lg  "
@@ -141,6 +148,20 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
                         ))}
+                        {user?.uid && (
+                            <li className=" rounded px-1 py-2 hover:dark:text-black hover:bg-[#d3ecf3] transition ease-in-out delay-150 hover:shadow-lg  ">
+                                <NavLink
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? 'bg-[#0097C3]   text-white px-3 py-2 rounded shadow-lg '
+                                            : ''
+                                    }
+                                    to="/dashboard"
+                                >
+                                    Dashboard
+                                </NavLink>
+                            </li>
+                        )}
                     </ul>
                     {/* Logo middle */}
                     <Link to="/home" className="btn btn-ghost normal-case text-xl md:hidden">
