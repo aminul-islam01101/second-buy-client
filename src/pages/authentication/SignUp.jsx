@@ -36,15 +36,15 @@ const SignUp = () => {
                 const { user } = result;
                 console.log(user);
                 reset();
-                setAuthToken(user);
+
                 const handleUpdateProfile = () => {
                     const profile = {
                         displayName: `${firstName} ${lastName}`,
                     };
                     updateUserProfile(profile)
                         .then(() => {
+                            setAuthToken({ ...user, role: data?.role });
                             // mutate({ email, userName: profile.displayName });
-                       
                         })
 
                         .catch((err) => console.error(err));
@@ -123,6 +123,22 @@ const SignUp = () => {
                                     )}
                                 </div>
                             </div>
+                        </label>
+                    </div>
+
+                    {/* selecting a role */}
+                    <div className="space-y-1 text-sm">
+                        <label htmlFor="role" className="block dark:text-gray-400">
+                            What do you want in Second-buy?
+                            <select
+                                placeholder="What you want?"
+                                id="role"
+                                className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                {...register('role', { required: true })}
+                            >
+                                <option value="buyer">Buy books</option>
+                                <option value="seller">Sell books</option>
+                            </select>
                         </label>
                     </div>
 

@@ -119,7 +119,7 @@ const Navbar = () => {
                     </div>
                     <NavLink to="/" className="btn btn-ghost normal-case hidden md:flex text-xl">
                         <img className="w-8 mr-2" src={Logo} alt="logo" />
-                        <span className="text-teal-600 dark:text-teal-300">Comix</span>
+                        <span className="text-teal-600 dark:text-teal-300">Second-buy</span>
                     </NavLink>
                 </div>
                 <div className="navbar-center lg:flex text-sm">
@@ -145,7 +145,7 @@ const Navbar = () => {
                     {/* Logo middle */}
                     <Link to="/home" className="btn btn-ghost normal-case text-xl md:hidden">
                         <img className="w-8 mr-2" src={Logo} alt="logo" />
-                        <span className="text-teal-600 dark:text-teal-300">Comix</span>
+                        <span className="text-teal-600 dark:text-teal-300">Second-buy</span>
                     </Link>
                 </div>
                 <div className="navbar-end text-sm ">

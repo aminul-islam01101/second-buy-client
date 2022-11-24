@@ -7,13 +7,11 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../../../Contexts/AuthContext';
 
-
-const BookingModal = () => {
-    const { handleSubmit, register } = useForm();
+const BookingModal = ({ role }) => {
     const { user } = useContext(AuthContext);
+    const { handleSubmit, register } = useForm();
 
     const onSubmit = (values) => {
-        //   mutate({ ...values, heroName: meetings?.name, price: meetings?.price });
         console.log(values);
     };
 
@@ -29,35 +27,38 @@ const BookingModal = () => {
                         ✕
                     </label>
                     <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-                       
+                    {role?.email ? (
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+                            <input
+                                type="text"
+                                placeholder="userName"
+                                defaultValue={user?.displayName}
+                                {...register('name')}
+                                className="w-full "
+                            />
+                            <input
+                                type="email"
+                                placeholder="email"
+                                defaultValue={user?.email}
+                                {...register('email')}
+                                className="w-full "
+                            />
+                            <input
+                                type="number"
+                                placeholder="phone number"
+                                {...register('phoneNumber')}
+                                className="w-full "
+                            />
 
-                        <input
-                            type="text"
-                            placeholder="userName"
-                            defaultValue={user?.displayName}
-                            {...register('name')}
-                            className="w-full "
-                        />
-                        <input
-                            type="email"
-                            placeholder="email"
-                            defaultValue={user?.email}
-                            {...register('email')}
-                            className="w-full "
-                        />
-                        <input
-                            type="number"
-                            placeholder="phone number"
-                            {...register('phoneNumber')}
-                            className="w-full "
-                        />
-
-                        
-                        <button type="submit" className="button w-full mt-5">
-                            Submit
-                        </button>
-                    </form>
+                            <button type="submit" className="button w-full mt-5">
+                                Submit
+                            </button>
+                        </form>
+                    ) : (
+                        <div className="text-white">
+                            Invalid booking. This is a seller id. try to login as a buyer
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

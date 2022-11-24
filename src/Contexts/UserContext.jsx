@@ -67,6 +67,10 @@ const UserContext = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     };
 
+
+
+    
+
     return (
         <AuthContext.Provider
             value={{
