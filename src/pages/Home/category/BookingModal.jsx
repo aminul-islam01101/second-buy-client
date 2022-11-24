@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import AuthContext from '../../../Contexts/AuthContext';
 
-const BookingModal = ({ role, id }) => {
+const BookingModal = ({ role, setModalControl, id }) => {
     const { user } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
     const tempId = '637f494d199c8502b7639ca9';
@@ -24,6 +24,7 @@ const BookingModal = ({ role, id }) => {
     console.log(storedBook);
 
     const onSubmit = (values) => {
+        setModalControl(null);
         console.log(values);
         if (storedBook?.sellerEmail === role?.email) {
             toast.error('invalid booking you are the owner of this book');
@@ -31,7 +32,6 @@ const BookingModal = ({ role, id }) => {
         }
 
         const bookingInfo = {
-  
             buyerEmail: role?.email,
             sellerEmail: storedBook?.sellerEmail,
             bookedProductId: tempId,

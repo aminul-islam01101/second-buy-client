@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 
-const BookCard = ({ handleClick }) => {
+const BookCard = ({ handleClick, modalControl }) => {
     console.log('role');
 
     return (
@@ -23,7 +23,7 @@ const BookCard = ({ handleClick }) => {
                         onClick={handleClick}
                         className="button disabled:bg-slate-300"
                     >
-                        <label className=" cursor-pointer " htmlFor="booking-modal">
+                        <label className=" cursor-pointer " htmlFor={modalControl}>
                             Book Now
                         </label>
                     </button>

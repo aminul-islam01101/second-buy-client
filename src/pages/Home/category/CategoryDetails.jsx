@@ -12,8 +12,10 @@ const CategoryDetails = () => {
 
     const { user } = useContext(AuthContext);
     const [role, setRole] = useState('');
+    const [modalControl, setModalControl] = useState(null);
     const handleClick = () => {
         console.log('hello');
+        setModalControl('booking-modal');
 
         axios.get(`${import.meta.env.VITE_API_URL}/user/${user?.email}`).then((res) => {
             if (res.data.message === 'success') {
@@ -27,9 +29,16 @@ const CategoryDetails = () => {
 
     return (
         <div>
-            <BooksCard handleClick={handleClick} />
+            <BooksCard handleClick={handleClick} modalControl={modalControl} />
 
-            <BookingModal id={id} role={role} />
+            {modalControl && (
+                <BookingModal
+                    id={id}
+                    role={role}
+                    setRole={setRole}
+                    setModalControl={setModalControl}
+                />
+            )}
         </div>
     );
 };
