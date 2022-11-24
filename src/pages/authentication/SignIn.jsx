@@ -6,7 +6,6 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -22,8 +21,7 @@ const Login = () => {
         handleSubmit,
         getValues,
     } = useForm({ mode: 'onChange' });
-    const { signIn, sendPassResetEmail, setLoading, googleSignIn, githubSignIn } =
-        useContext(AuthContext);
+    const { signIn, sendPassResetEmail, setLoading, googleSignIn } = useContext(AuthContext);
     const { email } = getValues();
 
     const navigate = useNavigate();
@@ -146,8 +144,6 @@ const Login = () => {
                     >
                         <FcGoogle />
                     </button>
-
-               
                 </div>
                 <p className="text-center text-xs dark:text-gray-400 sm:px-6">
                     Dont&#39;s have an account?

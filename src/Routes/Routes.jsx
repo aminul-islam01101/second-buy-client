@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import Error from '../pages/Error';
@@ -8,9 +7,10 @@ import SignIn from '../pages/authentication/SignIn';
 import SignUp from '../pages/authentication/SignUp';
 
 import Blogs from '../pages/Blogs';
+import Dashboard from '../pages/dashboard/Dashboard';
+import CategoryDetails from '../pages/Home/category/CategoryDetails';
 import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
-import Dashboard from '../pages/dashboard/Dashboard';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -22,6 +22,14 @@ const router = createBrowserRouter(
                 element={
                     <ProtectedRoute>
                         <Dashboard />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/category/:id"
+                element={
+                    <ProtectedRoute>
+                        <CategoryDetails />
                     </ProtectedRoute>
                 }
             />
