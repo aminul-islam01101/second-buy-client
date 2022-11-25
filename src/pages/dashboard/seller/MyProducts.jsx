@@ -5,13 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import ConfirmationModal from '../../../components/ConfirmationModal';
 import AuthContext from '../../../Contexts/AuthContext';
 import formatCurrency from '../../../Utilities/FormateCurrency';
-import ConfirmationModal from '../../../components/ConfirmationModal';
 
 const MyMeetup = () => {
     const { user } = useContext(AuthContext);
-    const [advertise, setAdvertise] = useState('action ');
+
     const [deleteProduct, setDeleteProduct] = useState(null);
     const { data: myProducts, refetch } = useQuery(['myProducts'], () =>
         axios
@@ -19,8 +19,6 @@ const MyMeetup = () => {
             .then((res) => res.data)
     );
     const handleDelete = (product) => {
-        console.log('deleted');
-        
         axios
             .delete(`${import.meta.env.VITE_API_URL}/myproduct/${product._id}`, {
                 // headers: {
@@ -47,11 +45,9 @@ const MyMeetup = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data === true) {
-                    setAdvertise('remove advertise');
-                }
-                if (data === false) {
-                    setAdvertise('set advertise');
+                if (data) {
+                    refetch();
+                    console.log(data);
                 }
             })
             .catch((err) => {
@@ -86,13 +82,22 @@ const MyMeetup = () => {
                                 <td>{formatCurrency(myProduct?.resalePrice)}</td>
                                 <td>{myProduct?.status}</td>
                                 <td>
-                                    {myProduct?.status === 'available' && (
+                                    {myProduct?.status === 'available' && !myProduct.advertised && (
                                         <button
                                             type="button"
                                             onClick={() => handleAdvertise(myProduct._id)}
                                             className="button bg-green-500 disabled:bg-slate-500"
                                         >
-                                            {advertise}
+                                            set advertisement
+                                        </button>
+                                    )}
+                                    {myProduct?.status === 'available' && myProduct.advertised && (
+                                        <button
+                                            type="button"
+                                            onClick={() => handleAdvertise(myProduct._id)}
+                                            className="button bg-rose-500 disabled:bg-slate-500"
+                                        >
+                                            Remove advertisement
                                         </button>
                                     )}
                                 </td>

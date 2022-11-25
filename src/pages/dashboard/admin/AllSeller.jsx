@@ -6,18 +6,13 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 
-
 const AllSeller = () => {
     const [deleteSeller, setDeleteSeller] = useState(null);
 
     const { data: sellers, refetch } = useQuery(['sellers'], () =>
-    axios
-        .get(`${import.meta.env.VITE_API_URL}/users/sellers`)
-        .then((res) => res.data)
-);
+        axios.get(`${import.meta.env.VITE_API_URL}/users/sellers`).then((res) => res.data)
+    );
     const handleDelete = (seller) => {
-  
-        
         axios
             .delete(`${import.meta.env.VITE_API_URL}/users/sellers?email=${seller?.email}`, {
                 // headers: {
@@ -35,8 +30,28 @@ const AllSeller = () => {
     const closeModal = () => {
         setDeleteSeller(null);
     };
+    const handleVerify = (email) => {
+        fetch(`${import.meta.env.VITE_API_URL}/seller/${email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                refetch()
+               
+                if (data.modifiedCount) {
+                    toast.success('Action done successfully');
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+           
 
-
+        // setVerify('advertised');
+    };
 
     return (
         <div className="container">
@@ -47,6 +62,7 @@ const AllSeller = () => {
                             <th className="py-2 px-4">Serial</th>
                             <th> Name</th>
                             <th>email</th>
+                            <th>Verify</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -59,9 +75,30 @@ const AllSeller = () => {
                                 <th>{i + 1}</th>
                                 <td className="py-2 px-4">{seller?.name}</td>
                                 <td>{seller?.email}</td>
-                               
                                 <td>
-                                <button
+                                    {seller.verified && (
+                                        <button
+                                        //    disabled={seller.verified} 
+                                            type="button"
+                                            onClick={() => handleVerify(seller?.email)}
+                                            className="button bg-red-500 disabled:bg-slate-500"
+                                        >
+                                           remove verification
+                                        </button>
+                                    )}
+                                    {!seller.verified && (
+                                        <button
+                                            type="button"
+                                            onClick={() => handleVerify(seller?.email)}
+                                            className="button bg-green-500 disabled:bg-slate-500"
+                                        >
+                                            verify
+                                        </button>
+                                    )}
+                                </td>
+
+                                <td>
+                                    <button
                                         type="button"
                                         onClick={() => setDeleteSeller(seller)}
                                         className="button bg-red-500 "

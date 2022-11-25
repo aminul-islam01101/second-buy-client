@@ -29,6 +29,8 @@ const SignUp = () => {
     // jwt verify
 
     const onSubmit = (data) => {
+        console.log(data.role);
+
         const { firstName, lastName } = data;
         setError('');
         createUser(email, password)
@@ -43,7 +45,7 @@ const SignUp = () => {
                     };
                     updateUserProfile(profile)
                         .then(() => {
-                            setAuthToken({ ...user, role: data?.role });
+                            setAuthToken({ ...user, role: data?.role, verified: false });
                             // mutate({ email, userName: profile.displayName });
                         })
 

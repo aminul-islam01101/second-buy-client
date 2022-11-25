@@ -1,8 +1,8 @@
 const setAuthToken = (user) => {
     const currentUser = {
         email: user?.email,
-        role: user?.role,
         name: user?.displayName,
+        role: user?.role,
     };
 
     fetch(`${import.meta.env.VITE_API_URL}/user/${user?.email}`, {

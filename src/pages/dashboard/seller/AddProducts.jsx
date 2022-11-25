@@ -71,6 +71,7 @@ const AddProduct = () => {
                         postingTime: new Date(),
                         sellerName: user?.displayName,
                         sellerEmail: user?.email,
+                        status: 'available',
                     };
                     mutate(booksInfo);
                 }
@@ -122,7 +123,9 @@ const AddProduct = () => {
                         />
 
                         {errors?.authorName?.type === 'maxLength' && (
-                            <p className="text-red-500">*Book author name cannot exceed 300 characters</p>
+                            <p className="text-red-500">
+                                *Book author name cannot exceed 300 characters
+                            </p>
                         )}
                     </div>
                     <div className="flex gap-2">
