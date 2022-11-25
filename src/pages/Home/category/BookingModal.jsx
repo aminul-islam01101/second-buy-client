@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import AuthContext from '../../../Contexts/AuthContext';
 
-const BookingModal = ({ role, setModalControl, }) => {
+const BookingModal = ({ buyer, setModalControl }) => {
     const { user } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
     const tempId = '6380e7e0d2adeedccf896954';
@@ -19,23 +19,24 @@ const BookingModal = ({ role, setModalControl, }) => {
     const { data: storedBook } = useQuery(['storedBook'], () =>
         axios.get(`${import.meta.env.VITE_API_URL}/book/${tempId}`).then((res) => res.data)
     );
-  
 
     console.log(storedBook);
 
     const onSubmit = (values) => {
-        
         console.log(values);
-        if (storedBook?.sellerEmail === role?.email) {
+        if (storedBook?.sellerEmail === buyer?.email) {
             toast.error('invalid booking you are the owner of this book');
             return;
         }
 
         const bookingInfo = {
-            buyerEmail: role?.email,
+            buyerEmail: buyer?.email,
             sellerEmail: storedBook?.sellerEmail,
             bookedProductId: tempId,
-            sellerName: storedBook?.seller,
+            sellerName: storedBook?.sellerName,
+            price: storedBook?.resalePrice,
+            image: storedBook?.image,
+            bookName: storedBook?.bookName,
         };
         console.log(bookingInfo);
 
@@ -59,7 +60,6 @@ const BookingModal = ({ role, setModalControl, }) => {
             .catch((err) => {
                 console.error(err);
             });
-           
     };
 
     return (
@@ -74,7 +74,7 @@ const BookingModal = ({ role, setModalControl, }) => {
                         ✕
                     </label>
                     <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
-                    {role?.email ? (
+                    {buyer?.email ? (
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
                             <input
                                 type="text"

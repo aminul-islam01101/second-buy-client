@@ -8,7 +8,7 @@ import SignUp from '../pages/authentication/SignUp';
 
 import Blogs from '../pages/Blogs';
 import ReportedProducts from '../pages/dashboard/admin/ReportedProducts';
-import MyOrders from '../pages/dashboard/MyOrders';
+import MyOrders from '../pages/dashboard/buyer/MyOrders';
 import AddProducts from '../pages/dashboard/seller/AddProducts';
 import MyProducts from '../pages/dashboard/seller/MyProducts';
 import CategoryDetails from '../pages/Home/category/CategoryDetails';
@@ -22,6 +22,7 @@ import MyDashboard from '../pages/dashboard/MyDashboard';
 import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
 import SellerRoute from './SellerRoute';
+import Payment from '../pages/dashboard/buyer/Payment';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -57,6 +58,14 @@ const router = createBrowserRouter(
                     element={
                         <BuyerRoute>
                             <MyOrders />
+                        </BuyerRoute>
+                    }
+                />
+                <Route
+                    path="/dashboard/payment/:id"
+                    element={
+                        <BuyerRoute>
+                            <Payment />
                         </BuyerRoute>
                     }
                 />
