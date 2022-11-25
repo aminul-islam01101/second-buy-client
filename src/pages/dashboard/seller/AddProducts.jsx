@@ -94,7 +94,7 @@ const AddProduct = () => {
                         <input
                             {...register('bookName', {
                                 required: true,
-                                maxLength: 50,
+                                maxLength: 300,
                             })}
                             type="text"
                             id="bookName"
@@ -103,7 +103,26 @@ const AddProduct = () => {
                         />
 
                         {errors?.bookName?.type === 'maxLength' && (
-                            <p className="text-red-500">*Last name cannot exceed 50 characters</p>
+                            <p className="text-red-500">*Book name cannot exceed 300 characters</p>
+                        )}
+                    </div>
+                    <div>
+                        <label className="label">
+                            <span className="label-text">Book Author Name</span>
+                        </label>
+                        <input
+                            {...register('authorName', {
+                                required: true,
+                                maxLength: 300,
+                            })}
+                            type="text"
+                            id="authorName"
+                            placeholder="Write Book Author Name"
+                            className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                        />
+
+                        {errors?.authorName?.type === 'maxLength' && (
+                            <p className="text-red-500">*Book author name cannot exceed 300 characters</p>
                         )}
                     </div>
                     <div className="flex gap-2">
