@@ -5,17 +5,21 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import ConfirmationModal from '../../../components/ConfirmationModal';
-import formateCurrency from '../../../Utilities/FormateCurrency';
 
-const AllBuyer = () => {
-    const [deleteProduct, setDeleteProduct] = useState(null);
 
-    const { data: reportedProducts, refetch } = useQuery(['reportedProducts'], () =>
-        axios.get(`${import.meta.env.VITE_API_URL}/products/reported`).then((res) => res.data)
-    );
-    const handleDelete = (product) => {
+const AllSeller = () => {
+    const [deleteSeller, setDeleteSeller] = useState(null);
+
+    const { data: sellers, refetch } = useQuery(['sellers'], () =>
+    axios
+        .get(`${import.meta.env.VITE_API_URL}/users/sellers`)
+        .then((res) => res.data)
+);
+    const handleDelete = (seller) => {
+  
+        
         axios
-            .delete(`${import.meta.env.VITE_API_URL}/products/reported?id=${product?._id}`, {
+            .delete(`${import.meta.env.VITE_API_URL}/users/sellers?email=${seller?.email}`, {
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`,
                 // },
@@ -23,14 +27,16 @@ const AllBuyer = () => {
             .then((res) => {
                 if (res.data.deletedCount) {
                     refetch();
-                    toast.success(`Hero ${product.name} deleted successfully`);
+                    toast.success(`Hero ${seller.name} deleted successfully`);
                 }
             });
     };
 
     const closeModal = () => {
-        setDeleteProduct(null);
+        setDeleteSeller(null);
     };
+
+
 
     return (
         <div className="container">
@@ -40,24 +46,24 @@ const AllBuyer = () => {
                         <tr>
                             <th className="py-2 px-4">Serial</th>
                             <th> Name</th>
-                            <th>Price</th>
+                            <th>email</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {reportedProducts.map((product, i) => (
+                        {sellers.map((seller, i) => (
                             <tr
-                                key={product._id}
+                                key={seller._id}
                                 className="bg-white odd:bg-gray-300 py-2 px-6 text-center"
                             >
                                 <th>{i + 1}</th>
-                                <td className="py-2 px-4">{product?.bookName}</td>
-                                <td>{formateCurrency(product?.resalePrice)}</td>
-
+                                <td className="py-2 px-4">{seller?.name}</td>
+                                <td>{seller?.email}</td>
+                               
                                 <td>
-                                    <button
+                                <button
                                         type="button"
-                                        onClick={() => setDeleteProduct(product)}
+                                        onClick={() => setDeleteSeller(seller)}
                                         className="button bg-red-500 "
                                     >
                                         <label
@@ -73,13 +79,13 @@ const AllBuyer = () => {
                     </tbody>
                 </table>
             </div>
-            {deleteProduct && (
+            {deleteSeller && (
                 <ConfirmationModal
                     title="Are you sure you want to delete?"
-                    message={`If you delete ${deleteProduct?.bookName}. It cannot be undone.`}
+                    message={`If you delete ${deleteSeller?.bookName}. It cannot be undone.`}
                     successAction={handleDelete}
                     successButtonName="Delete"
-                    modalData={deleteProduct}
+                    modalData={deleteSeller}
                     closeModal={closeModal}
                 />
             )}
@@ -87,4 +93,4 @@ const AllBuyer = () => {
     );
 };
 
-export default AllBuyer;
+export default AllSeller;

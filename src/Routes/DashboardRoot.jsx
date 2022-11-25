@@ -41,7 +41,10 @@ const DashboardRoot = () => {
                         {isAdmin && (
                             <>
                                 <li>
-                                    <Link to="/dashboard/users">All Users</Link>
+                                    <Link to="/dashboard/buyers">All buyers</Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/sellers">All sellers</Link>
                                 </li>
                                 <li>
                                     <Link to="/dashboard/reported">Reported</Link>

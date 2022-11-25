@@ -65,7 +65,7 @@ const Login = () => {
             .then((result) => {
                 const { user } = result;
                 console.log(user);
-                setAuthToken(user);
+                setAuthToken({ ...user, role: 'buyer'});
                 user?.uid && navigate(from, { replace: true });
                 //  saveUser(user.email, user.displayName);
                 // setUserEmail(user?.email);

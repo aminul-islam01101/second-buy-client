@@ -7,7 +7,6 @@ import SignIn from '../pages/authentication/SignIn';
 import SignUp from '../pages/authentication/SignUp';
 
 import Blogs from '../pages/Blogs';
-import AllUser from '../pages/dashboard/admin/AllUser';
 import ReportedProducts from '../pages/dashboard/admin/ReportedProducts';
 import MyOrders from '../pages/dashboard/MyOrders';
 import AddProducts from '../pages/dashboard/seller/AddProducts';
@@ -17,6 +16,8 @@ import AdminRoute from './AdminRoute';
 import BuyerRoute from './BuyerRoute';
 import DashboardRoot from './DashboardRoot';
 
+import AllBuyer from '../pages/dashboard/admin/AllBuyer';
+import AllSeller from '../pages/dashboard/admin/AllSeller';
 import MyDashboard from '../pages/dashboard/MyDashboard';
 import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
@@ -60,10 +61,18 @@ const router = createBrowserRouter(
                     }
                 />
                 <Route
-                    path="/dashboard/users"
+                    path="/dashboard/buyers"
                     element={
                         <AdminRoute>
-                            <AllUser />
+                            <AllBuyer />
+                        </AdminRoute>
+                    }
+                />
+                <Route
+                    path="/dashboard/sellers"
+                    element={
+                        <AdminRoute>
+                            <AllSeller />
                         </AdminRoute>
                     }
                 />
