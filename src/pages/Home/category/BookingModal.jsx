@@ -11,20 +11,20 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import AuthContext from '../../../Contexts/AuthContext';
 
-const BookingModal = ({ role, setModalControl, id }) => {
+const BookingModal = ({ role, setModalControl, }) => {
     const { user } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
-    const tempId = '637f494d199c8502b7639ca9';
+    const tempId = '6380e7e0d2adeedccf896954';
 
     const { data: storedBook } = useQuery(['storedBook'], () =>
         axios.get(`${import.meta.env.VITE_API_URL}/book/${tempId}`).then((res) => res.data)
     );
-    console.log(role);
+  
 
     console.log(storedBook);
 
     const onSubmit = (values) => {
-        setModalControl(null);
+        
         console.log(values);
         if (storedBook?.sellerEmail === role?.email) {
             toast.error('invalid booking you are the owner of this book');
@@ -48,6 +48,7 @@ const BookingModal = ({ role, setModalControl, id }) => {
         })
             .then((res) => res.json())
             .then((data) => {
+                setModalControl(null);
                 if (data.upsertedCount) {
                     toast.success('Booking successful');
                 }
@@ -58,6 +59,7 @@ const BookingModal = ({ role, setModalControl, id }) => {
             .catch((err) => {
                 console.error(err);
             });
+           
     };
 
     return (

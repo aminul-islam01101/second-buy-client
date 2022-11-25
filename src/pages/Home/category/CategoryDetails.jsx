@@ -8,13 +8,13 @@ import BooksCard from './BooksCard';
 
 const CategoryDetails = () => {
     const { id } = useParams();
-    console.log(id);
+  
 
     const { user } = useContext(AuthContext);
     const [role, setRole] = useState('');
-    const [modalControl, setModalControl] = useState(null);
+    const [modalControl, setModalControl] = useState('booking-modal');
     const handleClick = () => {
-        console.log('hello');
+     
         setModalControl('booking-modal');
 
         axios.get(`${import.meta.env.VITE_API_URL}/user/${user?.email}`).then((res) => {
@@ -25,7 +25,7 @@ const CategoryDetails = () => {
             }
         });
     };
-    console.log(role);
+
 
     return (
         <div>
