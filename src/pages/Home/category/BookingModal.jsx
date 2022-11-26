@@ -11,32 +11,32 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import AuthContext from '../../../Contexts/AuthContext';
 
-const BookingModal = ({ buyer, setModalControl }) => {
+const BookingModal = ({ buyer, setModalControl, product }) => {
     const { user } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
     const tempId = '638204271106df67c0a50041';
 
-    const { data: storedBook } = useQuery(['storedBook'], () =>
-        axios.get(`${import.meta.env.VITE_API_URL}/book/${tempId}`).then((res) => res.data)
-    );
+    // const { data: product } = useQuery(['product'], () =>
+    //     axios.get(`${import.meta.env.VITE_API_URL}/book/${tempId}`).then((res) => res.data)
+    // );
 
-    console.log(storedBook);
+
 
     const onSubmit = (values) => {
         console.log(values);
-        if (storedBook?.sellerEmail === buyer?.email) {
+        if (product?.sellerEmail === buyer?.email) {
             toast.error('invalid booking you are the owner of this book');
             return;
         }
 
         const bookingInfo = {
             buyerEmail: buyer?.email,
-            sellerEmail: storedBook?.sellerEmail,
+            sellerEmail: product?.sellerEmail,
             bookedProductId: tempId,
-            sellerName: storedBook?.sellerName,
-            price: storedBook?.resalePrice,
-            image: storedBook?.image,
-            bookName: storedBook?.bookName,
+            sellerName: product?.sellerName,
+            price: product?.resalePrice,
+            image: product?.image,
+            bookName: product?.bookName,
         };
         console.log(bookingInfo);
 
@@ -54,7 +54,7 @@ const BookingModal = ({ buyer, setModalControl }) => {
                     toast.success('Booking successful');
                 }
                 if (data.matchedCount) {
-                    toast.success(`you already booked ${storedBook.bookName}`);
+                    toast.success(`you already booked ${product.bookName}`);
                 }
             })
             .catch((err) => {

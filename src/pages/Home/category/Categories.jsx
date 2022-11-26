@@ -1,18 +1,33 @@
-import React from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect, useState } from 'react';
 import CategoryCard from './CategoryCard';
 
 const Categories = () => {
-    console.log('categories');
-    const product = {
-        id: 1,
-        seller: 'mujtoba',
-        sellerEmail: 'livin61542@probdd.com',
-        bookName: 'rohosser sondhan',
-    };
+    const [categories, setCategories] = useState([]);
+    // const { data: categories = [] } = useQuery(['categories'], () =>
+    //     axios.get(`${import.meta.env.VITE_API_URL}/categories`).then((res) => res.data)
+    // );
+    // console.log(categories);
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_URL}/categories`, {
+            headers: {
+                'content-type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setCategories(data);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }, []);
 
     return (
         <div>
-            <CategoryCard product={product} />
+            {categories?.map((category) => (
+                <CategoryCard key={category._id} category={category} />
+            ))}
         </div>
     );
 };

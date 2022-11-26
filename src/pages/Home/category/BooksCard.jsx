@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 
-const BookCard = ({ handleClick, modalControl }) => {
+const BooksCard = ({ handleClick, modalControl }) => {
     console.log('role');
 
     return (
@@ -33,4 +33,4 @@ const BookCard = ({ handleClick, modalControl }) => {
     );
 };
 
-export default BookCard;
+export default BooksCard;

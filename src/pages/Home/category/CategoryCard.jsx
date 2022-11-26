@@ -1,7 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CategoryCard = ({ product }) => (
+const CategoryCard = ({ category: { categoryId, categoryName, products } }) => (
     <div>
         <div className="w-full h-full rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
             <img
@@ -11,10 +12,13 @@ const CategoryCard = ({ product }) => (
             />
             <div className="flex flex-col justify-between p-6 space-y-8">
                 <div className="space-y-2">
-                    <h2 className="text-3xl font-semibold tracking-wide">card</h2>
-                    <p className="dark:text-gray-100">category name</p>
+                    <h2 className="text-3xl font-semibold tracking-wide">{categoryName}</h2>
+                    <p className="dark:text-gray-100">
+                   
+                        {products?.length} products in this category
+                    </p>
                 </div>
-                <Link to={`/category/${product.id}`}>
+                <Link to={`/category/${categoryId}`}>
                     <button type="button" className="button w-full">
                         Details
                     </button>
