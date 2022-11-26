@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -14,7 +15,7 @@ import AuthContext from '../../../Contexts/AuthContext';
 const BookingModal = ({ buyer, setModalControl, product }) => {
     const { user } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
-    const tempId = '638204271106df67c0a50041';
+  
 
     // const { data: product } = useQuery(['product'], () =>
     //     axios.get(`${import.meta.env.VITE_API_URL}/book/${tempId}`).then((res) => res.data)
@@ -32,7 +33,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
         const bookingInfo = {
             buyerEmail: buyer?.email,
             sellerEmail: product?.sellerEmail,
-            bookedProductId: tempId,
+            bookedProductId: product?._id,
             sellerName: product?.sellerName,
             price: product?.resalePrice,
             image: product?.image,
@@ -54,6 +55,8 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                     toast.success('Booking successful');
                 }
                 if (data.matchedCount) {
+                    console.log(data);
+                    
                     toast.success(`you already booked ${product.bookName}`);
                 }
             })

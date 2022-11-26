@@ -4,10 +4,7 @@ import CategoryCard from './CategoryCard';
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
-    // const { data: categories = [] } = useQuery(['categories'], () =>
-    //     axios.get(`${import.meta.env.VITE_API_URL}/categories`).then((res) => res.data)
-    // );
-    // console.log(categories);
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/categories`, {
             headers: {

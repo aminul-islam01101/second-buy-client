@@ -94,6 +94,8 @@ const CheckoutForm = ({ booking }) => {
                         setTransactionId(paymentIntent.id);
                     }
                 }).then(() => {
+                    console.log(bookedProductId);
+                    
                     fetch(`${import.meta.env.VITE_API_URL}/paid/${bookedProductId}`, {
                         method: 'PUT',
                         headers: {

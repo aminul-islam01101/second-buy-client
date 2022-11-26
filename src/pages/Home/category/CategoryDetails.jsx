@@ -35,7 +35,7 @@ const CategoryDetails = () => {
         <div>
             {category?.products?.map((product) => (
                 <div key={product._id}>
-                    <BooksCard handleClick={handleClick} modalControl={modalControl} />
+                    <BooksCard handleClick={handleClick} modalControl={modalControl}  product={product} />
                     <div>
                         {modalControl && (
                             <BookingModal

@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 
-const BooksCard = ({ handleClick, modalControl }) => {
+const BooksCard = ({ handleClick, modalControl, product }) => {
     console.log('role');
 
     return (
@@ -14,19 +15,18 @@ const BooksCard = ({ handleClick, modalControl }) => {
                 />
                 <div className="flex flex-col justify-between p-6 space-y-8">
                     <div className="space-y-2">
-                        <h2 className="text-3xl font-semibold tracking-wide">card</h2>
-                        <p className="dark:text-gray-100">category name</p>
+                        <h2 className="text-3xl font-semibold tracking-wide">{product.bookName}</h2>
+                        <p className="dark:text-gray-100">{product.bookName}</p>
                     </div>
 
-                    <button
-                        type="button"
+
+                    <label
                         onClick={handleClick}
-                        className="button disabled:bg-slate-300"
+                        className="button text-center disabled:bg-slate-300"
+                        htmlFor={modalControl}
                     >
-                        <label className=" cursor-pointer " htmlFor={modalControl}>
-                            Book Now
-                        </label>
-                    </button>
+                        Book Now
+                    </label>
                 </div>
             </div>
         </div>
