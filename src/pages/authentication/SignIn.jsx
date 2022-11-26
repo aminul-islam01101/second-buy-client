@@ -30,7 +30,6 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     const onSubmit = (data) => {
-      
         setError('');
         fetch(`${import.meta.env.VITE_API_URL}/user?email=${data?.email}`, {
             headers: {
@@ -39,7 +38,6 @@ const Login = () => {
         })
             .then((res) => res.json())
             .then((response) => {
-    
                 if (response?.user?.email) {
                     signIn(data?.email, data?.password)
                         .then((result) => {
@@ -54,9 +52,8 @@ const Login = () => {
                             console.log(error.message);
                             setError(error.message);
                         });
-                }
-                else{
-                    toast.error('Invalid user.Please sign up first')
+                } else {
+                    toast.error('Invalid user.Please sign up first');
                 }
             })
             .catch((err) => {

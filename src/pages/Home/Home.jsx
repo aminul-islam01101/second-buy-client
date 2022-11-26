@@ -1,11 +1,11 @@
 import React from 'react';
 // Import Swiper React components
 
-// Import Swiper styles
+// // Import Swiper styles
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 
-// import required modules
+// // import required modules
 import Categories from './category/Categories';
 import Slider from './Slider';
 

@@ -72,6 +72,7 @@ const AddProduct = () => {
                         sellerName: user?.displayName,
                         sellerEmail: user?.email,
                         status: 'available',
+                        advertised: false,
                     };
                     mutate(booksInfo);
                 }
