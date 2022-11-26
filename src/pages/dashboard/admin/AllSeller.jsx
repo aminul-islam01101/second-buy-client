@@ -10,14 +10,20 @@ const AllSeller = () => {
     const [deleteSeller, setDeleteSeller] = useState(null);
 
     const { data: sellers, refetch } = useQuery(['sellers'], () =>
-        axios.get(`${import.meta.env.VITE_API_URL}/users/sellers`).then((res) => res.data)
+        axios
+            .get(`${import.meta.env.VITE_API_URL}/users/sellers`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('token')}`,
+                },
+            })
+            .then((res) => res.data)
     );
     const handleDelete = (seller) => {
         axios
             .delete(`${import.meta.env.VITE_API_URL}/users/sellers?email=${seller?.email}`, {
-                // headers: {
-                //     authorization: `bearer ${localStorage.getItem('accessToken')}`,
-                // },
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('token')}`,
+                },
             })
             .then((res) => {
                 if (res.data.deletedCount) {
@@ -39,8 +45,8 @@ const AllSeller = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                refetch()
-               
+                refetch();
+
                 if (data.modifiedCount) {
                     toast.success('Action done successfully');
                 }
@@ -48,7 +54,6 @@ const AllSeller = () => {
             .catch((err) => {
                 console.error(err);
             });
-           
 
         // setVerify('advertised');
     };
@@ -78,12 +83,12 @@ const AllSeller = () => {
                                 <td>
                                     {seller.verified && (
                                         <button
-                                        //    disabled={seller.verified} 
+                                            //    disabled={seller.verified}
                                             type="button"
                                             onClick={() => handleVerify(seller?.email)}
                                             className="button bg-red-500 disabled:bg-slate-500"
                                         >
-                                           remove verification
+                                            remove verification
                                         </button>
                                     )}
                                     {!seller.verified && (

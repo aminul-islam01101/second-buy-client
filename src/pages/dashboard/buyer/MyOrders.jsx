@@ -13,7 +13,7 @@ const MyMeetup = () => {
         axios
             .get(`${import.meta.env.VITE_API_URL}/users/buyer?email=${user?.email}`, {
                 headers: {
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`,
+                    authorization: `bearer ${localStorage.getItem('token')}`,
                 },
             })
             .then((res) => res.data)
