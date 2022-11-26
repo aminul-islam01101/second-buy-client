@@ -30,20 +30,37 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     const onSubmit = (data) => {
-        console.log(data);
+      
         setError('');
-        signIn(data?.email, data?.password)
-            .then((result) => {
-                const { user } = result;
-                console.log(user);
-                setAuthToken(user);
+        fetch(`${import.meta.env.VITE_API_URL}/user?email=${data?.email}`, {
+            headers: {
+                'content-type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .then((response) => {
+    
+                if (response?.user?.email) {
+                    signIn(data?.email, data?.password)
+                        .then((result) => {
+                            const { user } = result;
+                            console.log(user);
+                            setAuthToken(user);
 
-                navigate(from, { replace: true });
+                            navigate(from, { replace: true });
+                        })
+
+                        .catch((error) => {
+                            console.log(error.message);
+                            setError(error.message);
+                        });
+                }
+                else{
+                    toast.error('Invalid user.Please sign up first')
+                }
             })
-
-            .catch((error) => {
-                console.log(error.message);
-                setError(error.message);
+            .catch((err) => {
+                console.error(err);
             });
     };
     const handleForgetPass = () => {
@@ -65,7 +82,7 @@ const Login = () => {
             .then((result) => {
                 const { user } = result;
                 console.log(user);
-                setAuthToken({ ...user, role: 'buyer'});
+                setAuthToken({ ...user, role: 'buyer' });
                 user?.uid && navigate(from, { replace: true });
                 //  saveUser(user.email, user.displayName);
                 // setUserEmail(user?.email);
@@ -88,7 +105,6 @@ const Login = () => {
                     onSubmit={handleSubmit(onSubmit)}
                     className="ng-untouched ng-pristine ng-valid space-y-6"
                 >
-                    
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Email</span>
