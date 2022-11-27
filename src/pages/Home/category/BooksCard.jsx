@@ -3,14 +3,48 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
+import { toast } from 'react-hot-toast';
 import { TiTickOutline } from 'react-icons/ti';
 
-const BooksCard = ({ handleClick, modalControl, product }) => {
+const BooksCard = ({ handleClick, modalControl, product, buyer }) => {
+    console.log(buyer);
+
     const { data: seller } = useQuery(['seller'], () =>
         axios
             .get(`${import.meta.env.VITE_API_URL}/sellers/verified/${product?.sellerEmail}`)
             .then((res) => res.data)
     );
+    const handleWishlist = (book) => {
+        console.log(buyer);
+        const addBook = {
+            resalePrice: book?.resalePrice,
+            image: book?.image,
+            status: book?.status,
+            bookName: book?.bookName,
+            authorName: book?.authorName,
+            buyerEmail: buyer?.email,
+        };
+
+        fetch(`${import.meta.env.VITE_API_URL}/addtowishlist/${book?._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(addBook),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.upsertedCount) {
+                    toast.success('successfully added to your wishlist')
+                }
+                if (data.matchedCount) {
+                    toast.error('You already added this product to your wishlist')
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
 
     const handleReport = (id) => {
         fetch(`${import.meta.env.VITE_API_URL}/book/reported/${id}`, {
@@ -41,7 +75,7 @@ const BooksCard = ({ handleClick, modalControl, product }) => {
                         <h2 className="text-3xl font-semibold tracking-wide">
                             {product?.bookName}
                         </h2>
-                        <p className="dark:text-gray-100 flex gap-5 items-center">
+                        <div className="dark:text-gray-100 flex gap-5 items-center">
                             <span> {product?.authorName}</span>
                             <div>
                                 {seller.verified && (
@@ -50,7 +84,7 @@ const BooksCard = ({ handleClick, modalControl, product }) => {
                                     </span>
                                 )}
                             </div>
-                        </p>
+                        </div>
                     </div>
                     <button
                         type="button"
@@ -58,6 +92,13 @@ const BooksCard = ({ handleClick, modalControl, product }) => {
                         className="button"
                     >
                         Report to Admin
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => handleWishlist(product)}
+                        className="button"
+                    >
+                        Add to wishlist
                     </button>
 
                     <label

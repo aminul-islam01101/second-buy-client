@@ -18,11 +18,12 @@ import DashboardRoot from './DashboardRoot';
 
 import AllBuyer from '../pages/dashboard/admin/AllBuyer';
 import AllSeller from '../pages/dashboard/admin/AllSeller';
+import Payment from '../pages/dashboard/buyer/Payment';
 import MyDashboard from '../pages/dashboard/MyDashboard';
+import Wishlist from '../pages/dashboard/seller/Wishlist';
 import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
 import SellerRoute from './SellerRoute';
-import Payment from '../pages/dashboard/buyer/Payment';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -66,6 +67,14 @@ const router = createBrowserRouter(
                     element={
                         <BuyerRoute>
                             <Payment />
+                        </BuyerRoute>
+                    }
+                />
+                <Route
+                    path="/dashboard/wishlist"
+                    element={
+                        <BuyerRoute>
+                            <Wishlist />
                         </BuyerRoute>
                     }
                 />
