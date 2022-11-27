@@ -28,7 +28,7 @@ export default function Slider({allAdvertised }) {
                 loop
                 spaceBetween={10}
                 navigation
-                thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+                // thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                 modules={[Autoplay, Pagination, FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
                 autoplay={{
@@ -40,8 +40,8 @@ export default function Slider({allAdvertised }) {
                 }}
             >
                 {allAdvertised?.map((advertised) => (
-                    <SwiperSlide key={Math.random()} className="h-[50vh]">
-                        <img src={advertised?.image} />
+                    <SwiperSlide key={advertised._id} className="h-[120vh]">
+                        <img className='h-full w-full' src={advertised?.image} />
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -51,12 +51,17 @@ export default function Slider({allAdvertised }) {
                 spaceBetween={10}
                 slidesPerView={1}
                 freeMode
+              
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
                 watchSlidesProgress
-                modules={[FreeMode, Navigation, Thumbs]}
+                modules={[Autoplay, Pagination, FreeMode, Navigation, Thumbs]}
                 className="mySwiper"
             >
                 {allAdvertised?.map((advertised) => (
-                    <SwiperSlide key={Math.random()} className="h-[50vh]">
+                    <SwiperSlide key={advertised._id} className="h-[50vh]">
                         {advertised?.bookName}
                     </SwiperSlide>
                 ))}

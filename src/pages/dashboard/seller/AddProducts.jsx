@@ -20,7 +20,7 @@ const AddProduct = () => {
 
     // get book Category
 
-    const { data: bookCategories } = useQuery(['bookCategories'], () =>
+    const { data: bookCategories, refetch } = useQuery(['bookCategories'], () =>
         axios.get(`${import.meta.env.VITE_API_URL}/bookcategory`).then((res) => res.data)
     );
 
@@ -78,6 +78,7 @@ const AddProduct = () => {
                     mutate(booksInfo);
                 }
             });
+        refetch();
         reset();
     };
 
@@ -172,12 +173,13 @@ const AddProduct = () => {
                                 {...register('buyingYear', {
                                     required: true,
                                     max: 2022,
-                                    min:1900
+                                    min: 1900,
                                 })}
-                                placeholder='yyyy'
+                                placeholder="yyyy"
                                 className="input input-bordered w-full "
                             />
-                            {(errors?.buyingYear?.type === 'max' || errors?.buyingYear?.type === 'min') && (
+                            {(errors?.buyingYear?.type === 'max' ||
+                                errors?.buyingYear?.type === 'min') && (
                                 <p className="text-red-500">
                                     *buying Year should between 1900-2022
                                 </p>
