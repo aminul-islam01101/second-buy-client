@@ -21,7 +21,7 @@ const Categories = () => {
     }, []);
 
     return (
-        <div>
+        <div className='grid grid-cols-2'>
             {categories?.map((category) => (
                 <CategoryCard key={category._id} category={category} />
             ))}

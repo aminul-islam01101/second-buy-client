@@ -171,13 +171,15 @@ const AddProduct = () => {
                                 type="number"
                                 {...register('buyingYear', {
                                     required: true,
-                                    maxLength: 4,
+                                    max: 2022,
+                                    min:1900
                                 })}
+                                placeholder='yyyy'
                                 className="input input-bordered w-full "
                             />
-                            {errors?.buyingYear?.type === 'maxLength' && (
+                            {(errors?.buyingYear?.type === 'max' || errors?.buyingYear?.type === 'min') && (
                                 <p className="text-red-500">
-                                    *buying Year cannot exceed 4 characters
+                                    *buying Year should between 1900-2022
                                 </p>
                             )}
                         </div>

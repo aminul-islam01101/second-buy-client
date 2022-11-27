@@ -85,4 +85,9 @@ body {
 .mySwiper .swiper-slide-thumb-active {
   opacity: 1;
 }
-
+.swiper-button-prev:after{
+  content: '';
+}
+.swiper-button-next:after{
+  content: '';
+}

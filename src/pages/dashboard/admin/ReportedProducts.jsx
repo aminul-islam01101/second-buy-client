@@ -23,7 +23,7 @@ const AllBuyer = () => {
             .then((res) => {
                 if (res.data.deletedCount) {
                     refetch();
-                    toast.success(`Hero ${product.name} deleted successfully`);
+                    toast.success(` ${product.bookName} deleted successfully`);
                 }
             });
     };
