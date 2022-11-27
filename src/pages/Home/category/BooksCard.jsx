@@ -7,22 +7,23 @@ import { toast } from 'react-hot-toast';
 import { TiTickOutline } from 'react-icons/ti';
 
 const BooksCard = ({ handleClick, modalControl, product, buyer }) => {
-    console.log(buyer);
-
     const { data: seller } = useQuery(['seller'], () =>
         axios
             .get(`${import.meta.env.VITE_API_URL}/sellers/verified/${product?.sellerEmail}`)
             .then((res) => res.data)
     );
     const handleWishlist = (book) => {
-        console.log(buyer);
+        console.log(book);
         const addBook = {
-            resalePrice: book?.resalePrice,
+            price: book?.resalePrice,
             image: book?.image,
             status: book?.status,
             bookName: book?.bookName,
             authorName: book?.authorName,
             buyerEmail: buyer?.email,
+            sellerEmail: book?.sellerEmail,
+            wishlistedProductId: book?._id,
+            addedToOrder: false,
         };
 
         fetch(`${import.meta.env.VITE_API_URL}/addtowishlist/${book?._id}`, {
@@ -35,10 +36,10 @@ const BooksCard = ({ handleClick, modalControl, product, buyer }) => {
             .then((res) => res.json())
             .then((data) => {
                 if (data.upsertedCount) {
-                    toast.success('successfully added to your wishlist')
+                    toast.success('successfully added to your wishlist');
                 }
                 if (data.matchedCount) {
-                    toast.error('You already added this product to your wishlist')
+                    toast.error('You already added this product to your wishlist');
                 }
             })
             .catch((err) => {

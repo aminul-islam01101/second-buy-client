@@ -20,7 +20,7 @@ import AllBuyer from '../pages/dashboard/admin/AllBuyer';
 import AllSeller from '../pages/dashboard/admin/AllSeller';
 import Payment from '../pages/dashboard/buyer/Payment';
 import MyDashboard from '../pages/dashboard/MyDashboard';
-import Wishlist from '../pages/dashboard/seller/Wishlist';
+import Wishlist from '../pages/dashboard/buyer/Wishlist';
 import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
 import SellerRoute from './SellerRoute';

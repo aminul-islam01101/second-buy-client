@@ -53,7 +53,7 @@ const MyMeetup = () => {
                                 </td>
                                 <td className="py-2 px-4">{myOrder?.bookName}</td>
                                 <td>{formatCurrency(myOrder?.price)}</td>
-                                <td>{myOrder?.timeSlot}</td>
+                             
                                 <td>
                                     {myOrder.price && !myOrder.paid && (
                                         <Link to={`/dashboard/payment/${myOrder._id}`}>
