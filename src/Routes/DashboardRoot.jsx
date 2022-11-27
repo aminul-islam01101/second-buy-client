@@ -64,6 +64,9 @@ const DashboardRoot = () => {
                                 <li>
                                     <Link to="/dashboard/addproducts">Add Products</Link>
                                 </li>
+                                <li>
+                                    <Link to="/dashboard/mybuyers">My Buyers</Link>
+                                </li>
                             </>
                         )}
                     </ul>

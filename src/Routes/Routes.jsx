@@ -24,6 +24,7 @@ import Wishlist from '../pages/dashboard/buyer/Wishlist';
 import ProtectedRoute from './ProtectedRoute';
 import Root from './Root';
 import SellerRoute from './SellerRoute';
+import MyBuyers from '../pages/dashboard/seller/MyBuyers';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -116,6 +117,14 @@ const router = createBrowserRouter(
                     element={
                         <SellerRoute>
                             <AddProducts />
+                        </SellerRoute>
+                    }
+                />
+                <Route
+                    path="/dashboard/mybuyers"
+                    element={
+                        <SellerRoute>
+                            <MyBuyers />
                         </SellerRoute>
                     }
                 />
