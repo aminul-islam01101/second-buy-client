@@ -17,8 +17,10 @@ import AuthContext from './AuthContext';
 
 const UserContext = ({ children }) => {
     // hooks
+ 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+
 
     // create user functionality
     const createUser = (email, password) => {
@@ -66,10 +68,6 @@ const UserContext = ({ children }) => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
     };
-
-
-
-    
 
     return (
         <AuthContext.Provider

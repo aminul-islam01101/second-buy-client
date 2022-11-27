@@ -1,10 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const CategoryCard = ({ category: { categoryId, categoryName, products } }) => (
-    <div>
-        <div className="w-full h-full rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
+const CategoryCard = ({ category: { categoryId, categoryName, categoryImage, products } }) => (
+    <div >
+        {/* <div className="w-full h-full rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
             <img
                 src="https://images.pexels.com/photos/1848924/pexels-photo-1848924.jpeg?auto=compress&cs=tinysrgb&w=300"
                 alt=""
@@ -23,6 +22,21 @@ const CategoryCard = ({ category: { categoryId, categoryName, products } }) => (
                         Details
                     </button>
                 </Link>
+            </div>
+        </div> */}
+
+        <div className="card w-full h-48 bg-base-100 shadow-xl image-full">
+            <figure>
+                <img className='w-full' src={categoryImage} alt="Shoes" />
+            </figure>
+            <div className="card-body">
+            <h2 className="text-3xl text-center font-semibold tracking-wide">{categoryName}</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-center">
+                    <button type="button" className="btn btn-primary">
+                        Buy Now
+                    </button>
+                </div>
             </div>
         </div>
     </div>

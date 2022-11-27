@@ -138,5 +138,27 @@ module.exports = {
             },
         },
     },
+    daisyui: {
+        themes: [
+            {
+                secondBuy: {
+                    primary: '#ECE8DD',
+                    secondary: '#ff781f',
+                    accent: '#4e4e4c',
+                    neutral: '#3d4451',
+                    'base-100': '#ffffff',
+                },
+            },
+            {
+                dark: {
+                    primary: '#183847',
+                    secondary: '#ff781f',
+                    accent: '#ddd',
+                    neutral: '#3d4451',
+                    'base-100': '#fff',
+                },
+            },
+        ],
+    },
     plugins: [daisyui, Form],
 };
