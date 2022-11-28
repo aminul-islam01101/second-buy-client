@@ -53,6 +53,7 @@ const SignUp = () => {
                 };
 
                 toast.success('Signup successful');
+                navigate('/');
 
                 handleUpdateProfile();
 

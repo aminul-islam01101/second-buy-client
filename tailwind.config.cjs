@@ -142,6 +142,7 @@ module.exports = {
         themes: [
             {
                 secondBuy: {
+                    warn: '##ECE8DD',
                     info: '#183847',
                     primary: '#ECE8DD',
                     secondary: '#ff781f',
@@ -149,10 +150,12 @@ module.exports = {
                     error: '#ffffff',
                     neutral: '#212121',
                     'base-100': '#ffffff',
+                    'base-200': '#ECE8DD',
                 },
             },
             {
                 dark: {
+                  
                     info: '#ECE8DD',
                     primary: '#183847',
                     secondary: '#ff781f',
@@ -160,6 +163,7 @@ module.exports = {
                     error: '#215066',
                     neutral: '#212121',
                     'base-100': '#000000',
+                    'base-200': '#215066',
                 },
             },
         ],

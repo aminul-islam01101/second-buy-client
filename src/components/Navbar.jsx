@@ -1,6 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+import { Box } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
@@ -52,8 +53,8 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="bg-primary shadow-lg w-full sticky top-0 left-0 z-50">
-            <div className="navbar  container ">
+        <div className="bg-base-200 shadow-lg w-full sticky top-0 left-0 z-50">
+            <Box className="navbar  container ">
                 <div className=" navbar-start ">
                     <div className="dropdown ">
                         <label tabIndex={0} className="btn btn-ghost md:hidden text-accent">
@@ -257,7 +258,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Box>
         </div>
     );
 };

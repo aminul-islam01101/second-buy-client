@@ -11,7 +11,14 @@ const CheckoutForm = ({ booking }) => {
 
     const stripe = useStripe();
     const elements = useElements();
-    const { price, email, bookName, _id, bookedProductId } = booking;
+    const { price, email, bookName, _id, bookedProductId,buyerPhoneNumber, buyerLocation, 
+        buyerEmail
+         } = booking;
+
+    const buyerInfo = {buyerPhoneNumber, buyerLocation, 
+        buyerEmail
+        };
+    
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -103,6 +110,7 @@ const CheckoutForm = ({ booking }) => {
                         headers: {
                             'content-type': 'application/json',
                         },
+                        body: JSON.stringify(buyerInfo),
                     })
                         .then((res) => res.json())
                         .then((data) => {
@@ -161,7 +169,7 @@ const CheckoutForm = ({ booking }) => {
             {success && (
                 <div className="text-center mt-10">
                     <p className="text-green-600 font-bold">{success}</p>
-                    <p>
+                    <p className='text-accent'>
                         Your transactionId: <span className="font-bold">{transactionId}</span>
                     </p>
                 </div>
