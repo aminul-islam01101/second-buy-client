@@ -20,7 +20,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
     // const { data: product } = useQuery(['product'], () =>
     //     axios.get(`${import.meta.env.VITE_API_URL}/book/${tempId}`).then((res) => res.data)
     // );
-
+    console.log(buyer);
 
 
     const onSubmit = (values) => {
@@ -29,6 +29,8 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
             toast.error('invalid booking you are the owner of this book');
             return;
         }
+  
+        
 
         const bookingInfo = {
             buyerEmail: buyer?.email,
@@ -76,7 +78,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                     >
                         ✕
                     </label>
-                    <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
+                    <h3 className="text-lg font-bold">Hello { buyer?.name || 'User'} </h3>
                     {buyer?.email ? (
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
                             <input
@@ -105,7 +107,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                             </button>
                         </form>
                     ) : (
-                        <div className="text-white">
+                        <div className="text-neutral">
                             Invalid booking. This is a seller id. try to login as a buyer
                         </div>
                     )}

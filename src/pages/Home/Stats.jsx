@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import CountUp from 'react-countup';

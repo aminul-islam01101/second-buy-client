@@ -31,6 +31,8 @@ const CategoryDetails = () => {
                     setBuyer(data.user);
                 } else {
                     setBuyer(data.message);
+                    console.log(data.message);
+                    
                 }
             })
             .catch((err) => {
@@ -51,9 +53,9 @@ const CategoryDetails = () => {
     };
 
     return (
-        <div>
+        <div className="bg-primary">
             {category?.products?.map((product) => (
-                <div key={product._id}>
+                <div className="grid gap-5" key={product._id}>
                     <BooksCard
                         handleClick={handleClick}
                         modalControl={modalControl}

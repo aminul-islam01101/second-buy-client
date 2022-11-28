@@ -15,7 +15,7 @@ export default function Home() {
     );
 
     return (
-        <div>
+        <div data-aos="zoom-in">
             <div className="hero min-h-screen bg-[url(https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)]">
                 <div className="hero-overlay bg-neutral bg-opacity-70" />
                 <div className="hero-content text-center text-neutral-content">
@@ -29,7 +29,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="bg-primary">
+            <div  className="bg-primary">
                 <div id="category" className="container pt-48  ">
                     <h2 className="text-center text-accent text-4xl mb-20 ">
                         Search Based on category
@@ -37,11 +37,13 @@ export default function Home() {
                     <Categories />
                 </div>
                 {allAdvertised && (
-                    <div className="grid md:grid-cols-2 mt-40 container ">
+                    <div className="grid md:grid-cols-2 my-20 gap-10 md:gap-0 container shadow-lg p-5 ">
                         <Slider allAdvertised={allAdvertised} />
                     </div>
                 )}
-                <Statistic />
+                <div data-aos="zoom-in" >
+                    <Statistic />
+                </div>
             </div>
         </div>
     );

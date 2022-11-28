@@ -21,7 +21,7 @@ const Categories = () => {
     }, []);
 
     return (
-        <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-5 ">
+        <div data-aos="zoom-in"  className="grid xl:grid-cols-3 md:grid-cols-2 gap-5 ">
             {categories?.map((category) => (
                 <CategoryCard key={category._id} category={category} />
             ))}

@@ -10,13 +10,11 @@ import 'swiper/swiper.min.css';
 import './Slider.css';
 
 // import required modules
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { Autoplay, FreeMode, Navigation, Pagination, Thumbs } from 'swiper';
+import formatCurrency from '../../Utilities/FormateCurrency';
 
-export default function Slider({allAdvertised }) {
+export default function Slider({ allAdvertised }) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    
 
     return (
         <>
@@ -32,7 +30,7 @@ export default function Slider({allAdvertised }) {
                 modules={[Autoplay, Pagination, FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
                 autoplay={{
-                    delay: 2500,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }}
                 pagination={{
@@ -40,8 +38,8 @@ export default function Slider({allAdvertised }) {
                 }}
             >
                 {allAdvertised?.map((advertised) => (
-                    <SwiperSlide key={advertised._id} className="h-[120vh]">
-                        <img className='h-full w-full' src={advertised?.image} />
+                    <SwiperSlide key={advertised._id} className="h-[50vh]">
+                        <img className="h-full w-full" src={advertised?.image} />
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -51,9 +49,8 @@ export default function Slider({allAdvertised }) {
                 spaceBetween={10}
                 slidesPerView={1}
                 freeMode
-              
                 autoplay={{
-                    delay: 2500,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }}
                 watchSlidesProgress
@@ -62,7 +59,26 @@ export default function Slider({allAdvertised }) {
             >
                 {allAdvertised?.map((advertised) => (
                     <SwiperSlide key={advertised._id} className="h-[50vh]">
-                        {advertised?.bookName}
+                        <div className="flex flex-col md:border border-secondary p-5">
+                            <p className="text-accent">
+                                <span className="font-bold">BookName: </span>
+                                {advertised?.bookName}
+                            </p>
+                            <p className="text-accent">
+                                <span className="font-bold">Author Name: </span>{' '}
+                                {advertised?.authorName}
+                            </p>
+                            <p className="text-accent">
+                                <span className="font-bold">Edition: </span> {advertised?.edition}th
+                            </p>
+                            <p className="text-accent">
+                                <span className="font-bold">Buying Year: </span> {advertised?.buyingYear}
+                            </p>
+                            <p className="text-accent">
+                                <span className="font-bold">Resale Price: </span>
+                                {formatCurrency(advertised?.resalePrice)}
+                            </p>
+                        </div>
                     </SwiperSlide>
                 ))}
             </Swiper>
