@@ -1,6 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
@@ -10,12 +8,30 @@ import Slider from './Slider';
 import { Statistic } from './Stats';
 
 export default function Home() {
-    const { data: allAdvertised } = useQuery(['allAdvertised'], () =>
-        axios.get(`${import.meta.env.VITE_API_URL}/advertised`).then((res) => res.data)
-    );
+    const [allAdvertised, setAllAdvertised] = useState([]);
+
+    // const { data: allAdvertised } = useQuery(['allAdvertised'], () =>
+    //     axios.get('https://second-buy-server.vercel.app/advertised').then((res) => res.data)
+    // );
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_URL}/advertised`, {
+            headers: {
+                'content-type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                
+                setAllAdvertised(data);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }, []);
 
     return (
-        <div >
+        <div>
             <div className="hero min-h-screen bg-[url(https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)]">
                 <div className="hero-overlay bg-neutral bg-opacity-70" />
                 <div className="hero-content text-center text-neutral-content">
@@ -29,7 +45,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div  className="bg-primary">
+            <div className="bg-primary">
                 <div id="category" className="container pt-48  ">
                     <h2 className="text-center text-accent text-4xl mb-20 ">
                         Search Based on category
@@ -41,7 +57,7 @@ export default function Home() {
                         <Slider allAdvertised={allAdvertised} />
                     </div>
                 )}
-                <div data-aos="zoom-in" >
+                <div data-aos="zoom-in">
                     <Statistic />
                 </div>
             </div>
