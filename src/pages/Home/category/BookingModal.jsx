@@ -72,7 +72,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
         <div>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box relative p-10">
+                <div className="modal-box relative p-10 bg-primary text-accent">
                     <label
                         htmlFor="booking-modal"
                         className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -91,7 +91,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                                         readOnly
                                         defaultValue={product?.bookName}
                                         {...register('bookName')}
-                                        className="w-full  input py-2 input-bordered "
+                                        className="w-full  input py-2 input-bordered bg-error "
                                     />
                                 </label>
                             </div>
@@ -105,7 +105,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                                         readOnly
                                         defaultValue={formatCurrency(product?.resalePrice)}
                                         {...register('price')}
-                                        className="w-full  input py-2 input-bordered "
+                                        className="w-full  input py-2 input-bordered bg-error "
                                     />
                                 </label>
                             </div>
@@ -119,7 +119,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                                         readOnly
                                         defaultValue={user?.displayName}
                                         {...register('name')}
-                                        className="w-full  input py-2 input-bordered "
+                                        className="w-full  input py-2 input-bordered bg-error"
                                     />
                                 </label>
                             </div>
@@ -133,7 +133,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                                         placeholder="email"
                                         defaultValue={user?.email}
                                         {...register('email')}
-                                        className="w-full  input py-2 input-bordered "
+                                        className="w-full  input py-2 input-bordered bg-error"
                                     />
                                 </label>
                             </div>
@@ -148,7 +148,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                                         {...register('phoneNumber', {
                                             required: '*Phone Number is required',
                                         })}
-                                        className="w-full  input py-2 input-bordered "
+                                        className="w-full  input py-2 input-bordered bg-error"
                                     />
                                     {errors.phoneNumber && (
                                         <p className="text-red-600">
@@ -165,7 +165,7 @@ const BookingModal = ({ buyer, setModalControl, product }) => {
                                     {...register('location', {
                                         required: '*Location is required',
                                     })}
-                                    className="select select-info w-full "
+                                    className="select select-accent w-full bg-error"
                                 >
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Chittagong">Chittagong</option>

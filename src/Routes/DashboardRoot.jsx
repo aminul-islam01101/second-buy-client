@@ -2,7 +2,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
+import Avatar from '../assets/images/avatar.png';
 import Navbar from '../components/Navbar';
 import AuthContext from '../Contexts/AuthContext';
 import useAdmin from '../hooks/useAdmin';
@@ -26,46 +27,81 @@ const DashboardRoot = () => {
                 </div>
                 <div className="drawer-side  ">
                     <label htmlFor="dashboardOpener" className="drawer-overlay" />
-                    <ul className="menu p-4 w-56 bg-neutral text-base-content">
-                        <li>
-                            {isAdmin && <Link to="/dashboard">Admin Dashboard</Link>}
-                            {isSeller && <Link to="/dashboard">Seller Dashboard</Link>}
-                            {isBuyer && <Link to="/dashboard">Buyer Dashboard</Link>}
+                    <ul className="menu p-4 w-64 bg-info  text-base-100">
+                        <li className="mb-10">
+                            {isAdmin && (
+                                <div className="flex">
+                                    <div>{user?.displayName}s Dashboard</div>
+                                    <div>
+                                        <img
+                                            className="w-12 h-12 rounded-full"
+                                            src={user?.photoURL || Avatar}
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                            {isSeller && (
+                                <div className="flex">
+                                    <div>{user?.displayName}s Dashboard</div>
+                                    <div>
+                                        <img
+                                            className="w-12 h-12 rounded-full"
+                                            src={user?.photoURL || Avatar}
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                            {isBuyer && (
+                                <NavLink to="/dashboard">
+                                    <div className="flex">
+                                        <div>{user?.displayName}s Dashboard</div>
+                                        <div>
+                                            <img
+                                                className="w-12 h-12 rounded-full"
+                                                src={user?.photoURL || Avatar}
+                                                alt=""
+                                            />
+                                        </div>
+                                    </div>
+                                </NavLink>
+                            )}
                         </li>
 
                         {isBuyer && (
-                            <>
+                            <div className="border border-accent p-2">
                                 <li>
-                                    <Link to="/dashboard/myorders">My Orders</Link>
+                                    <NavLink to="/dashboard/myorders">My Orders</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/dashboard/wishlist">My Wishlist</Link>
+                                    <NavLink to="/dashboard/wishlist">My Wishlist</NavLink>
                                 </li>
-                            </>
+                            </div>
                         )}
                         {isAdmin && (
                             <>
                                 <li>
-                                    <Link to="/dashboard/buyers">All buyers</Link>
+                                    <NavLink to="/dashboard/buyers">All buyers</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/dashboard/sellers">All sellers</Link>
+                                    <NavLink to="/dashboard/sellers">All sellers</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/dashboard/reported">Reported</Link>
+                                    <NavLink to="/dashboard/reported">Reported</NavLink>
                                 </li>
                             </>
                         )}
                         {isSeller && (
                             <>
                                 <li>
-                                    <Link to="/dashboard/myproducts">My Products</Link>
+                                    <NavLink to="/dashboard/myproducts">My Products</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/dashboard/addproducts">Add Products</Link>
+                                    <NavLink to="/dashboard/addproducts">Add Products</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/dashboard/mybuyers">My Buyers</Link>
+                                    <NavLink to="/dashboard/mybuyers">My Buyers</NavLink>
                                 </li>
                             </>
                         )}

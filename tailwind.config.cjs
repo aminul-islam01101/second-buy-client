@@ -142,20 +142,24 @@ module.exports = {
         themes: [
             {
                 secondBuy: {
+                    info: '#183847',
                     primary: '#ECE8DD',
                     secondary: '#ff781f',
                     accent: '#4e4e4c',
+                    error: '#ffffff',
                     neutral: '#212121',
                     'base-100': '#ffffff',
                 },
             },
             {
                 dark: {
+                    info: '#ECE8DD',
                     primary: '#183847',
                     secondary: '#ff781f',
                     accent: '#ddd',
+                    error: '#215066',
                     neutral: '#212121',
-                    'base-100': '#fff',
+                    'base-100': '#000000',
                 },
             },
         ],

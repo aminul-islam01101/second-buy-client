@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 const CheckoutForm = ({ booking }) => {
     const [cardError, setCardError] = useState('');
@@ -11,7 +12,6 @@ const CheckoutForm = ({ booking }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { price, email, bookName, _id, bookedProductId } = booking;
-    
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -90,24 +90,24 @@ const CheckoutForm = ({ booking }) => {
                 .then((data) => {
                     console.log(data);
                     if (data.insertedId) {
+                        Swal.fire('Thanks!', 'For Purchasing!', 'success');
                         setSuccess('Congrats! your payment completed');
                         setTransactionId(paymentIntent.id);
                     }
-                }).then(() => {
+                })
+                .then(() => {
                     console.log(bookedProductId);
-                    
+
                     fetch(`${import.meta.env.VITE_API_URL}/paid/${bookedProductId}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json',
                         },
-                      
                     })
                         .then((res) => res.json())
                         .then((data) => {
+                           
                             console.log(data);
-                
-                            
                         })
                         .catch((err) => {
                             console.error(err);
@@ -118,13 +118,14 @@ const CheckoutForm = ({ booking }) => {
     };
 
     return (
-        <>
+        <div className="">
             <form
+                className="bg-slate-100"
                 onSubmit={handleSubmit}
                 style={{
-                    border: '2px solid #000',
+                    border: '2px solid #215066',
                     width: '30vw',
-                    minWidth: '500px',
+                    minWidth: '400px',
                     alignSelf: 'center',
 
                     borderRadius: '7px',
@@ -135,9 +136,10 @@ const CheckoutForm = ({ booking }) => {
                     options={{
                         style: {
                             base: {
-                                boxShadow:'0px 0px 0px 0.5px',
-                                fontSize: '16px',
+                                boxShadow: '0px 0.1px 0px 0.5px',
+                                fontSize: '12px',
                                 color: '#000',
+
                                 '::placeholder': {
                                     color: '#000',
                                 },
@@ -149,24 +151,23 @@ const CheckoutForm = ({ booking }) => {
                     }}
                 />
                 <button
-                    className="btn btn-sm mt-4 btn-primary"
+                    className="btn btn-sm mt-4 btn-secondary"
                     type="submit"
                     disabled={!stripe || !clientSecret || processing}
-                 
                 >
                     Pay
                 </button>
             </form>
             <p className="text-red-500">{cardError}</p>
             {success && (
-                <div>
-                    <p className="text-green-500">{success}</p>
+                <div className='text-center mt-10'>
+                    <p className="text-green-600 font-bold">{success}</p>
                     <p>
                         Your transactionId: <span className="font-bold">{transactionId}</span>
                     </p>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

@@ -5,12 +5,15 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 import AuthContext from '../../../Contexts/AuthContext';
 import formatCurrency from '../../../Utilities/FormateCurrency';
 
 const Wishlist = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    
 
     const [deleteProduct, setDeleteProduct] = useState(null);
     const { data: myWishlist, refetch } = useQuery(['myWishlist'], () =>
@@ -49,6 +52,7 @@ const Wishlist = () => {
 
                     toast.error(`you already booked ${wishlist.bookName}`);
                 }
+                navigate('/dashboard/myorders')
             })
             .catch((err) => {
                 console.error(err);
