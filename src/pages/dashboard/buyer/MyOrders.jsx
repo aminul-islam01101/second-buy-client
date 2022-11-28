@@ -20,59 +20,67 @@ const MyMeetup = () => {
     );
 
     return (
-        <div className="container">
-            <div className="overflow-x-auto">
-                <table className=" bg-slate-200 w-full">
-                    <thead>
-                        <tr>
-                            <th className="py-2 px-4">Serial</th>
-                            <th>Image</th>
-                            <th>Book Title</th>
-                            <th>Price</th>
-                            <th>Payment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {myOrders.map((myOrder, i) => (
-                            <tr
-                                key={myOrder._id}
-                                className="bg-white odd:bg-gray-300 py-2 px-6 text-center"
-                            >
-                                <th>{i + 1}</th>
-                                <td className="py-2 px-4">
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img
-                                                    src={myOrder?.image}
-                                                    alt="Avatar Tailwind CSS Component"
-                                                />
+        <div className="bg-primary min-h-screen pt-20">
+            <div className="container">
+                <div className="overflow-x-auto">
+                    <table className=" bg-slate-200 w-full">
+                        <thead>
+                            <tr>
+                                <th className="py-2 px-4">Serial</th>
+                                <th>Image</th>
+                                <th>Book Title</th>
+                                <th>Price</th>
+                                <th>Payment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {myOrders.map((myOrder, i) => (
+                                <tr
+                                    key={myOrder._id}
+                                    className="bg-white odd:bg-gray-100 py-2 px-6 text-center"
+                                >
+                                    <th>{i + 1}</th>
+                                    <td className="py-2 px-4">
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img
+                                                        src={myOrder?.image}
+                                                        alt="Avatar Tailwind CSS Component"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td className="py-2 px-4">{myOrder?.bookName}</td>
-                                <td>{formatCurrency(myOrder?.price)}</td>
-                             
-                                <td>
-                                    {myOrder.price && !myOrder.paid && (
-                                        <Link to={`/dashboard/payment/${myOrder._id}`}>
+                                    </td>
+                                    <td className="py-2 px-4">{myOrder?.bookName}</td>
+                                    <td>{formatCurrency(myOrder?.price)}</td>
+
+                                    <td>
+                                        {myOrder.price && !myOrder.paid && (
+                                            <Link to={`/dashboard/payment/${myOrder._id}`}>
+                                                <button
+                                                    type="button"
+                                                    className=" px-4 py-1 text-accent rounded-md btn-secondary btn-sm"
+                                                >
+                                                    Pay
+                                                </button>
+                                            </Link>
+                                        )}
+                                        {myOrder.price && myOrder.paid && (
                                             <button
                                                 type="button"
-                                                className="btn btn-primary btn-sm"
+                                                disabled={myOrder.paid}
+                                                className="disabled:btn-accent px-3 py-1 rounded-md"
                                             >
-                                                Pay
+                                                Paid
                                             </button>
-                                        </Link>
-                                    )}
-                                    {myOrder.price && myOrder.paid && (
-                                        <span className="text-green-500">Paid</span>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

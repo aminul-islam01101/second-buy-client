@@ -91,7 +91,7 @@ const CheckoutForm = ({ booking }) => {
                     console.log(data);
                     if (data.insertedId) {
                         Swal.fire('Thanks!', 'For Purchasing!', 'success');
-                        setSuccess('Congrats! your payment completed');
+                        setSuccess('Congrats! your payment has been completed');
                         setTransactionId(paymentIntent.id);
                     }
                 })
@@ -106,7 +106,6 @@ const CheckoutForm = ({ booking }) => {
                     })
                         .then((res) => res.json())
                         .then((data) => {
-                           
                             console.log(data);
                         })
                         .catch((err) => {
@@ -151,7 +150,7 @@ const CheckoutForm = ({ booking }) => {
                     }}
                 />
                 <button
-                    className="btn btn-sm mt-4 btn-secondary"
+                    className="btn btn-sm mt-4 btn-secondary text-accent"
                     type="submit"
                     disabled={!stripe || !clientSecret || processing}
                 >
@@ -160,7 +159,7 @@ const CheckoutForm = ({ booking }) => {
             </form>
             <p className="text-red-500">{cardError}</p>
             {success && (
-                <div className='text-center mt-10'>
+                <div className="text-center mt-10">
                     <p className="text-green-600 font-bold">{success}</p>
                     <p>
                         Your transactionId: <span className="font-bold">{transactionId}</span>

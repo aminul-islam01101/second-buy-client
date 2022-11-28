@@ -10,15 +10,15 @@ const ConfirmationModal = ({
 }) => (
     <div>
         <input type="checkbox" id="confirmation-modal" className="modal-toggle" />
-        <div className="modal ">
-            <div className="modal-box">
-                <h3 className="font-bold text-lg">{title}</h3>
-                <p className="py-4 text-white">{message}</p>
+        <div className="modal  ">
+            <div className="modal-box bg-error">
+                <h3 className="font-bold text-lg text-accent">{title}</h3>
+                <p className="py-4 text-accent">{message}</p>
                 <div className="modal-action">
                     <button
                         type="button"
                         onClick={() => successAction(modalData)}
-                        className="button "
+                        className="btn  bg-red-400 "
                     >
                         <label className=" cursor-pointer " htmlFor="confirmation-modal">
                             {successButtonName}

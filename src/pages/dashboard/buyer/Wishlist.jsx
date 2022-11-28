@@ -13,7 +13,6 @@ import formatCurrency from '../../../Utilities/FormateCurrency';
 const Wishlist = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    
 
     const [deleteProduct, setDeleteProduct] = useState(null);
     const { data: myWishlist, refetch } = useQuery(['myWishlist'], () =>
@@ -52,7 +51,7 @@ const Wishlist = () => {
 
                     toast.error(`you already booked ${wishlist.bookName}`);
                 }
-                navigate('/dashboard/myorders')
+                navigate('/dashboard/myorders');
             })
             .catch((err) => {
                 console.error(err);
@@ -77,72 +76,73 @@ const Wishlist = () => {
         setDeleteProduct(null);
     };
 
-
     return (
-        <div className="container">
-            <div className="overflow-x-auto">
-                <table className=" bg-slate-200 w-full">
-                    <thead>
-                        <tr>
-                            <th className="py-2 px-4">Serial</th>
-                            <th>Books Name</th>
-                            <th>Price</th>
-                            <th>status</th>
-                            <th>Add to order</th>
-                            <th>delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {myWishlist.map((wishlist, i) => (
-                            <tr
-                                key={wishlist._id}
-                                className="bg-white odd:bg-gray-300 py-2 px-6 text-center"
-                            >
-                                <th>{i + 1}</th>
-                                <td className="py-2 px-4">{wishlist?.bookName}</td>
-                                <td>{formatCurrency(wishlist?.price)}</td>
-                                <td>{wishlist?.status}</td>
-                                <td>
-                                    {wishlist?.status === 'available' && (
+        <div className="bg-primary min-h-screen pt-20">
+            <div className="container">
+                <h1 className='text-center text-accent text-2xl mb-8'>{user?.displayName}s Order</h1>
+                <div className="overflow-x-auto">
+                    <table className=" bg-slate-200 w-full">
+                        <thead>
+                            <tr>
+                                <th className="py-2 px-4">Serial</th>
+                                <th>Books Name</th>
+                                <th>Price</th>
+                                <th>status</th>
+                                <th>Add to order</th>
+                                <th>delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {myWishlist.map((wishlist, i) => (
+                                <tr
+                                    key={wishlist._id}
+                                    className="bg-white odd:bg-gray-300 py-2 px-6 text-center"
+                                >
+                                    <th>{i + 1}</th>
+                                    <td className="py-2 px-4">{wishlist?.bookName}</td>
+                                    <td>{formatCurrency(wishlist?.price)}</td>
+                                    <td>{wishlist?.status}</td>
+                                    <td>
+                                        {wishlist?.status === 'available' && (
+                                            <button
+                                                type="button"
+                                                onClick={() => handleAddToOrder(wishlist)}
+                                                className="button"
+                                            >
+                                                add to order
+                                            </button>
+                                        )}
+                                    </td>
+                                    <td>
                                         <button
                                             type="button"
-                                            onClick={() => handleAddToOrder(wishlist)}
-                                            className="button"
+                                            onClick={() => setDeleteProduct(wishlist)}
+                                            className="button bg-red-500 text-accent "
                                         >
-                                            add to order
+                                            <label
+                                                className=" cursor-pointer "
+                                                htmlFor="confirmation-modal"
+                                            >
+                                                Delete
+                                            </label>
                                         </button>
-                                    )}
-                                </td>
-
-                                <td>
-                                    <button
-                                        type="button"
-                                        onClick={() => setDeleteProduct(wishlist)}
-                                        className="button bg-red-500 "
-                                    >
-                                        <label
-                                            className=" cursor-pointer "
-                                            htmlFor="confirmation-modal"
-                                        >
-                                            Delete
-                                        </label>
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                {deleteProduct && (
+                    <ConfirmationModal
+                        title="Are you sure you want to delete?"
+                        message={`If you delete ${deleteProduct?.bookName}. It cannot be undone.`}
+                        successAction={handleDelete}
+                        successButtonName="Delete"
+                        modalData={deleteProduct}
+                        closeModal={closeModal}
+                    />
+                )}
             </div>
-            {deleteProduct && (
-                <ConfirmationModal
-                    title="Are you sure you want to delete?"
-                    message={`If you delete ${deleteProduct?.bookName}. It cannot be undone.`}
-                    successAction={handleDelete}
-                    successButtonName="Delete"
-                    modalData={deleteProduct}
-                    closeModal={closeModal}
-                />
-            )}
         </div>
     );
 };
