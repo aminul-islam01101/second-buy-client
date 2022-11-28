@@ -41,6 +41,7 @@ const AllSeller = () => {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('token')}`,
             },
         })
             .then((res) => res.json())

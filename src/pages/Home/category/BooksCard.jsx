@@ -161,7 +161,6 @@ const BooksCard = ({ handleClick, modalControl, product, buyer }) => {
 
                             <div className="mt-10 flex justify-between items-center flex-row lg:flex-col  space-y-2 border border-accent py-5  px-10 rounded-md m-10">
                                 <div>
-                             
                                     <p>
                                         <span className="font-bold mr-3">Edition: </span>
                                         {product?.edition}
@@ -184,13 +183,14 @@ const BooksCard = ({ handleClick, modalControl, product, buyer }) => {
                                     </p>
                                 </div>
 
-                                <div className='border border-accent p-2  '>
+                                <div className="border border-accent p-2  ">
                                     <p>
                                         <span className="font-bold mr-3">Resale Price: </span>
                                         {formatCurrency(product?.resalePrice)}
                                     </p>
                                 </div>
                             </div>
+                            <p className="mb-4">{product.description.slice(0, 150)}</p>
                             <label
                                 type="button"
                                 onClick={handleClick}

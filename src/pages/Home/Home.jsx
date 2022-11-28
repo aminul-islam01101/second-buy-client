@@ -15,7 +15,7 @@ export default function Home() {
     );
 
     return (
-        <div data-aos="zoom-in">
+        <div >
             <div className="hero min-h-screen bg-[url(https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)]">
                 <div className="hero-overlay bg-neutral bg-opacity-70" />
                 <div className="hero-content text-center text-neutral-content">
