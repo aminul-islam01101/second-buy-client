@@ -152,10 +152,10 @@ const Login = () => {
                     <div className="flex items-center space-x-1">
                         <div className="h-px flex-1 dark:bg-gray-700 sm:w-16" />
 
-                        <p className="px-3 text-sm dark:text-gray-400">
-                            {' '}
+                        <div className="px-3 text-sm dark:text-gray-400">
+                          
                             <p className="text-center">or</p> Login with social accounts
-                        </p>
+                        </div>
                         <div className="h-px flex-1 dark:bg-gray-700 sm:w-16" />
                     </div>
                     <div className="flex justify-center space-x-4">
