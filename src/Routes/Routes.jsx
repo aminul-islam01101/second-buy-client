@@ -6,7 +6,7 @@ import Home from '../pages/Home/Home';
 import SignIn from '../pages/authentication/SignIn';
 import SignUp from '../pages/authentication/SignUp';
 
-import Blogs from '../pages/Blogs';
+import Blogs from '../pages/Home/blogs/Blogs';
 import ReportedProducts from '../pages/dashboard/admin/ReportedProducts';
 import MyOrders from '../pages/dashboard/buyer/MyOrders';
 import AddProducts from '../pages/dashboard/seller/AddProducts';
