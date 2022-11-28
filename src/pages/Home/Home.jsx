@@ -10,9 +10,24 @@ import Slider from './Slider';
 import { Statistic } from './Stats';
 
 export default function Home() {
-    const { data: allAdvertised } = useQuery(['allAdvertised'], () =>
-        axios.get(`${import.meta.env.VITE_API_URL}/advertised`).then((res) => res.data)
-    );
+  const [allAdvertised, setAllAdvertised] = useState([]);
+    
+       useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_URL}/advertised`, {
+            headers: {
+                'content-type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                
+                setAllAdvertised(data);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }, []);
 
     return (
         <div >
