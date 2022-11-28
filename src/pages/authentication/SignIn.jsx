@@ -94,81 +94,87 @@ const Login = () => {
     };
 
     return (
-        <div className="grid min-h-90v place-items-center  ">
-            <h2 className="text-xl text-rose-600 font-bold my-10">{error}</h2>
-            <div className="w-full max-w-md space-y-3 rounded-xl p-8 bg-slate-300 dark:bg-gray-900 dark:text-gray-100">
-                <h1 className="text-center text-2xl font-bold">Login</h1>
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="ng-untouched ng-pristine ng-valid space-y-6"
-                >
-                    <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text">Email</span>
-                        </label>
-                        <input
-                            type="text"
-                            {...register('email', {
-                                required: 'Email Address is required',
-                            })}
-                            className="input input-bordered w-full "
-                        />
-                        {errors.email && <p className="text-red-600">{errors.email?.message}</p>}
+        <div className="">
+            <div className="grid min-h-90v place-items-center  text-accent  ">
+                <h2 className="text-xl text-rose-600 font-bold my-10">{error}</h2>
+                <div className="w-full max-w-md space-y-3 rounded-xl p-8 bg-primary">
+                    <h1 className="text-center text-2xl font-bold">Login</h1>
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="ng-untouched ng-pristine ng-valid space-y-6"
+                    >
+                        <div className="form-control w-full">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter Your email"
+                                {...register('email', {
+                                    required: '*Email Address is required',
+                                })}
+                                className="w-full  input py-2 input-bordered bg-error text-accent"
+                            />
+                            {errors.email && (
+                                <p className="text-red-600">{errors.email?.message}</p>
+                            )}
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input
+                                placeholder="Type Your PassWord"
+                                type="password"
+                                {...register('password', {
+                                    required: '*Password is required',
+                                    minLength: {
+                                        value: 6,
+                                        message: 'Password must be 6 characters or longer',
+                                    },
+                                })}
+                                className="w-full  input py-2 input-bordered bg-error text-accent "
+                            />
+                            {errors.password && (
+                                <p className="text-red-600">{errors.password?.message}</p>
+                            )}
+                        </div>
+                        <div className="flex justify-end text-xs dark:text-gray-400">
+                            Forgot Password?
+                            <button type="button" className="underline" onClick={handleForgetPass}>
+                                Reset
+                            </button>
+                        </div>
+                        <button type="submit" className="button">
+                            Login
+                        </button>
+                    </form>
+                    <div className="flex items-center space-x-1">
+                        <div className="h-px flex-1 dark:bg-gray-700 sm:w-16" />
+
+                        <p className="px-3 text-sm dark:text-gray-400">
+                            {' '}
+                            <p className="text-center">or</p> Login with social accounts
+                        </p>
+                        <div className="h-px flex-1 dark:bg-gray-700 sm:w-16" />
                     </div>
-                    <div className="form-control w-full ">
-                        <label className="label">
-                            <span className="label-text">Password</span>
-                        </label>
-                        <input
-                            type="password"
-                            {...register('password', {
-                                required: 'Password is required',
-                                minLength: {
-                                    value: 6,
-                                    message: 'Password must be 6 characters or longer',
-                                },
-                            })}
-                            className="input input-bordered w-full "
-                        />
-                        {errors.password && (
-                            <p className="text-red-600">{errors.password?.message}</p>
-                        )}
-                    </div>
-                    <div className="flex justify-end text-xs dark:text-gray-400">
-                        Forgot Password?
-                        <button type="button" className="underline" onClick={handleForgetPass}>
-                            Reset
+                    <div className="flex justify-center space-x-4">
+                        <button
+                            onClick={handleGoogleSignIn}
+                            type="button"
+                            aria-label="Log in with Google"
+                            className="button"
+                        >
+                            <FcGoogle />
                         </button>
                     </div>
-                    <button type="submit" className="button w-full rounded-sm p-3 text-center">
-                        Login
-                    </button>
-                </form>
-                <div className="flex items-center space-x-1 pt-4">
-                    <div className="h-px flex-1 dark:bg-gray-700 sm:w-16" />
-                    <p className="px-3 text-sm dark:text-gray-400">Login with social accounts</p>
-                    <div className="h-px flex-1 dark:bg-gray-700 sm:w-16" />
+                    <p className="text-center text-xs  sm:px-6">
+                        Dont&#39;s have an account?
+                        <Link to="/signup" rel="noopener noreferrer" className="underline ">
+                            Sign up
+                        </Link>
+                    </p>
                 </div>
-                <div className="flex justify-center space-x-4">
-                    <button
-                        onClick={handleGoogleSignIn}
-                        type="button"
-                        aria-label="Log in with Google"
-                        className="rounded-sm  p-3 px-4 py-2 dark:bg-transparent bg-gray-400"
-                    >
-                        <FcGoogle />
-                    </button>
-                </div>
-                <p className="text-center text-xs dark:text-gray-400 sm:px-6">
-                    Dont&#39;s have an account?
-                    <Link
-                        to="/signup"
-                        rel="noopener noreferrer"
-                        className="underline dark:text-gray-100"
-                    >
-                        Sign up
-                    </Link>
-                </p>
             </div>
         </div>
     );

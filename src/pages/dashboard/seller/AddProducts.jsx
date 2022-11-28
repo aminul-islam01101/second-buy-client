@@ -85,7 +85,7 @@ const AddProduct = () => {
     return (
         <div className="grid min-h-90v place-items-center  ">
             <h2 className="text-xl text-rose-600 font-bold my-10">{error}</h2>
-            <div className="w-full max-w-md space-y-3 rounded-xl p-8 bg-slate-300 dark:bg-gray-900 dark:text-gray-100">
+            <div className="w-full max-w-md space-y-3 rounded-xl p-8 bg-primary text-accent">
                 <h1 className="text-center text-2xl font-bold">Add products</h1>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
@@ -103,7 +103,7 @@ const AddProduct = () => {
                             type="text"
                             id="bookName"
                             placeholder="Book Name"
-                            className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                            className="w-full  input py-2 input-bordered bg-error"
                         />
 
                         {errors?.bookName?.type === 'maxLength' && (
@@ -122,7 +122,7 @@ const AddProduct = () => {
                             type="text"
                             id="authorName"
                             placeholder="Write Book Author Name"
-                            className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                            className="w-full  input py-2 input-bordered bg-error"
                         />
 
                         {errors?.authorName?.type === 'maxLength' && (
@@ -138,10 +138,11 @@ const AddProduct = () => {
                             </label>
                             <input
                                 type="number"
+                                placeholder="Price"
                                 {...register('originalPrice', {
                                     required: 'Price is required',
                                 })}
-                                className="input input-bordered w-full "
+                                className="w-full  input py-2 input-bordered bg-error "
                             />
                             {errors.originalPrice && (
                                 <p className="text-red-600">{errors.originalPrice?.message}</p>
@@ -153,10 +154,11 @@ const AddProduct = () => {
                             </label>
                             <input
                                 type="number"
+                                placeholder="Resale price"
                                 {...register('resalePrice', {
                                     required: 'Price is required',
                                 })}
-                                className="input input-bordered w-full "
+                                className="w-full  input py-2 input-bordered bg-error "
                             />
                             {errors.resalePrice && (
                                 <p className="text-red-600">{errors.resalePrice?.message}</p>
@@ -176,7 +178,7 @@ const AddProduct = () => {
                                     min: 1900,
                                 })}
                                 placeholder="yyyy"
-                                className="input input-bordered w-full "
+                                className="w-full  input py-2 input-bordered bg-error "
                             />
                             {(errors?.buyingYear?.type === 'max' ||
                                 errors?.buyingYear?.type === 'min') && (
@@ -195,7 +197,8 @@ const AddProduct = () => {
                                     required: true,
                                     maxLength: 4,
                                 })}
-                                className="input input-bordered w-full "
+                                placeholder="Type books edition"
+                                className="w-full  input py-2 input-bordered bg-error "
                             />
                             {errors?.edition?.type === 'maxLength' && (
                                 <p className="text-red-500">*edition cannot exceed 4 characters</p>
@@ -207,11 +210,12 @@ const AddProduct = () => {
                             <span className="label-text"> Contact Info</span>
                         </label>
                         <input
+                            placeholder="phone Number"
                             type="number"
                             {...register('phoneNumber', {
-                                required: 'Price is required',
+                                required: 'phoneNumber is required',
                             })}
-                            className="input input-bordered w-full "
+                            className="w-full  input py-2 input-bordered bg-error "
                         />
                         {errors.phoneNumber && (
                             <p className="text-red-600">{errors.phoneNumber?.message}</p>
@@ -222,10 +226,14 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text">Book Condition</span>
                         </label>
-                        <select {...register('location')} className="select select-info w-full ">
-                            <option value="excellent">excellent</option>
-                            <option value="good">good</option>
-                            <option value="fair">fair</option>
+                        <select
+                            required
+                            {...register('location')}
+                            className="select w-full  input py-2 input-bordered bg-error "
+                        >
+                            <option value="excellent">Excellent</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
                         </select>
                     </div>
                     {/* condition */}
@@ -233,7 +241,7 @@ const AddProduct = () => {
                         <label className="label">
                             <span className="label-text">Location</span>
                         </label>
-                        <select {...register('condition')} className="select select-info w-full ">
+                        <select {...register('condition')} className="select w-full  input py-2 input-bordered bg-error ">
                             <option value="Dhaka">Dhaka</option>
                             <option value="Chittagong">Chittagong</option>
                             <option value="Sylhet">Sylhet</option>
@@ -248,7 +256,7 @@ const AddProduct = () => {
                         <select
                             name=""
                             id=""
-                            className="select select-info w-full "
+                            className="select w-full  input py-2 input-bordered bg-error "
                             {...register('categoryId', { required: true })}
                         >
                             {bookCategories.map((category) => (
@@ -267,7 +275,7 @@ const AddProduct = () => {
                         <input
                             type="file"
                             {...register('photo', { required: 'Image is required' })}
-                            className="input py-2 input-bordered w-full "
+                            className="input py-2 w-full  input py-2 input-bordered bg-error "
                         />
                         {errors.photo && <p className="text-red-600">{errors.photo?.message}</p>}
                     </div>
@@ -292,7 +300,7 @@ const AddProduct = () => {
                         </label>
                     </div>
 
-                    <button type="submit" className="button w-full rounded-sm p-3 text-center">
+                    <button type="submit" className="button">
                         Submit
                     </button>
                 </form>

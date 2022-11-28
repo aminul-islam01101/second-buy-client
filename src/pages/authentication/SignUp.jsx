@@ -66,7 +66,7 @@ const SignUp = () => {
     };
 
     return (
-        <div className="container w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
+        <div className="container w-full max-w-md p-8 space-y-3 my-10 rounded-xl  bg-primary text-accent">
             <h1 className="text-2xl font-bold text-center">Sign Up</h1>
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -87,7 +87,7 @@ const SignUp = () => {
                                         })}
                                         id="firstName"
                                         placeholder="First Name"
-                                        className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                        className="w-full  input py-2 input-bordered bg-error "
                                     />
 
                                     {errors?.lastName?.type === 'pattern' && (
@@ -111,7 +111,7 @@ const SignUp = () => {
                                         })}
                                         id="lastName"
                                         placeholder="Last Name"
-                                        className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                        className="w-full  input py-2 input-bordered bg-error"
                                     />
 
                                     {errors?.lastName?.type === 'pattern' && (
@@ -136,7 +136,7 @@ const SignUp = () => {
                             <select
                                 placeholder="What you want?"
                                 id="role"
-                                className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                className="w-full  input py-2 input-bordered bg-error"
                                 {...register('role', { required: true })}
                             >
                                 <option value="buyer">Buy books</option>
@@ -154,7 +154,7 @@ const SignUp = () => {
                                 type="email"
                                 id="email"
                                 placeholder="Enter email"
-                                className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                className="w-full  input py-2 input-bordered bg-error"
                             />
                         </label>
                     </div>
@@ -171,7 +171,7 @@ const SignUp = () => {
                                 type="password"
                                 id="password"
                                 placeholder="Password"
-                                className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                className="w-full  input py-2 input-bordered bg-error"
                             />
                             {errors?.password?.type === 'pattern' && (
                                 <p className="text-red-500">
@@ -192,7 +192,7 @@ const SignUp = () => {
                                 })}
                                 id="confirmPassword"
                                 placeholder="Confirm password"
-                                className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                                className="w-full  input py-2 input-bordered bg-error"
                             />
                             {errors?.confirmPassword && (
                                 <p className="text-red-500">{errors?.confirmPassword?.message}</p>
@@ -223,7 +223,7 @@ const SignUp = () => {
                             <div>
                                 <button
                                     type="submit"
-                                    className="w-full mt-8 px-8 py-3 font-semibold rounded-md dark:bg-violet-400 bg-sky-500 dark:text-gray-900"
+                                    className="button mt-5"
                                 >
                                     Sign Up
                                 </button>

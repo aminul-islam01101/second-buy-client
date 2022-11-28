@@ -14,9 +14,11 @@ const MyBuyers = () => {
     );
 
     return (
-        <div className='bg-primary min-h-screen pt-20'>
+        <div className="bg-primary min-h-screen pt-20">
             <div className="container">
-            <h1 className='text-center text-accent text-2xl mb-8'>{user?.displayName}&#39;s Buyers</h1>
+                <h1 className="text-center text-accent text-2xl mb-8">
+                    {user?.displayName}&#39;s Buyers
+                </h1>
                 <div className="overflow-x-auto">
                     <table className=" bg-slate-200 w-full">
                         <thead>
