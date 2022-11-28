@@ -8,9 +8,12 @@
     .container-fluid {
         @apply w-full px-0;
     }
-    .button {
+    .button1 {
         @apply inline-block whitespace-nowrap rounded-md border-0 bg-[#38c2aa] hover:bg-[#1b7061] px-4 py-2 font-semibold text-black uppercase hover:text-white outline-none;
         font-size: 0.8rem;
+    }
+    .button {
+        @apply flex items-center w-full gap-2  py-3 justify-center px-4 rounded-md cursor-pointer border-solid border-2 border-secondary hover:bg-secondary bg-[#ff781f]/50;
     }
     body {
         @apply dark:bg-gray-400 bg-slate-100;

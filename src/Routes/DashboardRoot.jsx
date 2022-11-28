@@ -19,14 +19,14 @@ const DashboardRoot = () => {
     return (
         <div>
             <Navbar />
-            <div className="drawer drawer-mobile">
+            <div className="drawer drawer-mobile ">
                 <input id="dashboardOpener" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content ">
                     <Outlet />
                 </div>
                 <div className="drawer-side  ">
                     <label htmlFor="dashboardOpener" className="drawer-overlay" />
-                    <ul className="menu p-4 w-56 bg-base-100 text-base-content">
+                    <ul className="menu p-4 w-56 bg-neutral text-base-content">
                         <li>
                             {isAdmin && <Link to="/dashboard">Admin Dashboard</Link>}
                             {isSeller && <Link to="/dashboard">Seller Dashboard</Link>}
