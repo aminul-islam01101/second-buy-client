@@ -10,9 +10,6 @@ import { Statistic } from './Stats';
 export default function Home() {
     const [allAdvertised, setAllAdvertised] = useState([]);
 
-    // const { data: allAdvertised } = useQuery(['allAdvertised'], () =>
-    //     axios.get('https://second-buy-server.vercel.app/advertised').then((res) => res.data)
-    // );
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}/advertised`, {
             headers: {
@@ -22,7 +19,7 @@ export default function Home() {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                
+
                 setAllAdvertised(data);
             })
             .catch((err) => {
